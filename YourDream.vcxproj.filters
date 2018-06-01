@@ -1,17 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="internal">
+      <UniqueIdentifier>{fb63033a-6727-4adc-bdda-58c9a8ed4bcf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="internal\logging">
+      <UniqueIdentifier>{2ba980e7-9f04-4836-bf1f-b1aaf1ea62eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="internal\sampgdk">
+      <UniqueIdentifier>{14bd48e3-63e5-47f2-9497-897d8070d9e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="events">
+      <UniqueIdentifier>{609d3166-542d-40c3-b07f-891d2eb08d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entities">
+      <UniqueIdentifier>{987616f7-0488-4ce9-949a-db660097ea79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="internal\amx">
+      <UniqueIdentifier>{83714f28-cf06-4741-b010-58b4562712c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{be4e5b0f-ee70-442e-9592-145b1d19869a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="managers">
+      <UniqueIdentifier>{d5099c2d-e6e0-4004-9b7c-9a92abfc7119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="database">
+      <UniqueIdentifier>{2c5f90bf-3b62-46d8-8c15-f18973a09696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="database\sqlite">
+      <UniqueIdentifier>{11d8cc28-67e2-4ff3-ac5f-5fbc8c740b14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="patterns">
+      <UniqueIdentifier>{40deb0ff-ac25-45a2-ad0b-8b695b75f85e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\internal\logging\Log.h">
+      <Filter>internal\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\sampgdk\sampgdk.h">
+      <Filter>internal\sampgdk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\plugin.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\plugincommon.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\CVehicle.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\CPlayer.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\amx\amx.h">
+      <Filter>internal\amx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\amx\getch.h">
+      <Filter>internal\amx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\amx\sclinux.h">
+      <Filter>internal\amx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\CCommandProcessor.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\managers\CPlayerManager.h">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database\sqlite\sqlite3.h">
+      <Filter>database\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database\CDataBase.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patterns\CSingleton.h">
+      <Filter>patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\internal\sampgdk\sampgdk.c">
+      <Filter>internal\sampgdk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\internal\main.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\internal\amxplugin.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\internal\plugin.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\CVehicle.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\CPlayer.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\internal\playerActions.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\CCommandProcessor.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\managers\CPlayerManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\database\sqlite\sqlite3.c">
+      <Filter>database\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\database\CDataBase.cpp">
+      <Filter>database</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\export.def" />
   </ItemGroup>
 </Project>

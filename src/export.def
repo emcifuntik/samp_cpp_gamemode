@@ -1,0 +1,12 @@
+EXPORTS
+	Supports
+	Load
+	Unload
+	ProcessTick
+	OnGameModeInit
+	OnPlayerConnect
+	OnPlayerDisconnect
+	OnPlayerSpawn
+	OnPlayerRequestClass
+	OnPlayerCommandText
+	OnDialogResponse

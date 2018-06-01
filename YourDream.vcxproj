@@ -26,13 +26,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -69,14 +69,34 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>tmp\$(Configuration)\</IntDir>
+    <IncludePath>./src;./src/internal;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>tmp\$(Configuration)\</IntDir>
+    <IncludePath>./src;./src/internal;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>SAMPGDK_AMALGAMATION;SAMPGDK_CPP_WRAPPERS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <ModuleDefinitionFile>./src/export.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(OutputPath)$(TargetFileName)" "$(SolutionDir)..\..\server\plugins\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Autocopy to server folder</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -94,6 +114,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>SAMPGDK_AMALGAMATION;SAMPGDK_CPP_WRAPPERS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -115,6 +137,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\core\CCommandProcessor.h" />
+    <ClInclude Include="src\database\CDataBase.h" />
+    <ClInclude Include="src\database\sqlite\sqlite3.h" />
+    <ClInclude Include="src\entities\CPlayer.h" />
+    <ClInclude Include="src\entities\CVehicle.h" />
+    <ClInclude Include="src\internal\amx\amx.h" />
+    <ClInclude Include="src\internal\amx\getch.h" />
+    <ClInclude Include="src\internal\amx\sclinux.h" />
+    <ClInclude Include="src\internal\logging\Log.h" />
+    <ClInclude Include="src\internal\plugin.h" />
+    <ClInclude Include="src\internal\plugincommon.h" />
+    <ClInclude Include="src\internal\sampgdk\sampgdk.h" />
+    <ClInclude Include="src\managers\CPlayerManager.h" />
+    <ClInclude Include="src\patterns\CSingleton.h" />
+    <ClInclude Include="src\stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\CCommandProcessor.cpp" />
+    <ClCompile Include="src\database\CDataBase.cpp" />
+    <ClCompile Include="src\database\sqlite\sqlite3.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\entities\CPlayer.cpp" />
+    <ClCompile Include="src\entities\CVehicle.cpp" />
+    <ClCompile Include="src\internal\amxplugin.cpp" />
+    <ClCompile Include="src\internal\main.cpp" />
+    <ClCompile Include="src\internal\playerActions.cpp" />
+    <ClCompile Include="src\internal\plugin.cpp" />
+    <ClCompile Include="src\internal\sampgdk\sampgdk.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\managers\CPlayerManager.cpp" />
+    <ClCompile Include="src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\export.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
