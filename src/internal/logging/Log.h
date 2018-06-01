@@ -89,7 +89,7 @@ public:
 	LOG_COLOR(LWhite, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY, "\033[97m");
 
 	inline static void Endl() {
-		Instance() << std::endl << White;
+		get() << std::endl << White;
 	}
 
 	// Output types
@@ -97,7 +97,7 @@ public:
 		template<typename T>
 		inline Log& operator<<(const T& val)
 		{
-			return Instance()
+			return get()
 				.Put(Log::White)
 				.Put(" ")
 				.Put(val);
@@ -108,7 +108,7 @@ public:
 		template<typename T>
 		inline Log& operator<<(const T& val)
 		{
-			return Instance()
+			return get()
 				.Put(Log::Red)
 				.Put("[Error] ")
 				.Put(val);
@@ -120,7 +120,7 @@ public:
 		template<typename T>
 		inline Log& operator<<(const T& val)
 		{
-			return Instance()
+			return get()
 				.Put(Log::Yellow)
 				.Put("[Debug] ")
 				.Put(val);

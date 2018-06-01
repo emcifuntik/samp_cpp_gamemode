@@ -9,7 +9,7 @@ protected:
 	CSingleton& operator=(const CSingleton&) = delete;
 	virtual ~CSingleton() = default;
 public:
-	static T& Instance() noexcept(std::is_nothrow_constructible<T>::value)
+	static T& get() noexcept(std::is_nothrow_constructible<T>::value)
 	{
 		static T s;
 		return s;

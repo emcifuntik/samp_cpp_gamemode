@@ -1,9 +1,7 @@
 #pragma once
 
-class CPlayerManager
+class CPlayerManager: public CSingleton<CPlayerManager>
 {
-  CPlayerManager();
-  ~CPlayerManager();
   CPlayer * playersPool[1000] = { nullptr };
   int maxID = 0;
 
@@ -11,18 +9,16 @@ class CPlayerManager
   std::vector<std::function<bool(CPlayer*)>> spawnHandlers;
   std::vector<std::function<bool(CPlayer*, int)>> disconnectHandlers;
 public:
-  static CPlayerManager & Get() {
-    static CPlayerManager instance;
-    return instance;
-  }
 
   bool Connect(int playerid);
-  bool Spawn(int playerid);
-  bool Disconnect(int playerid, int reason);
-
   bool OnConnect(std::function<bool(CPlayer*)> callback);
+
+  bool Spawn(int playerid);
   bool OnSpawn(std::function<bool(CPlayer*)> callback);
+
+  bool Disconnect(int playerid, int reason);
   bool OnDisconnect(std::function<bool(CPlayer*, int)> callback);
+
 
   CPlayer* operator[](int playerid) {
     return this->playersPool[playerid];

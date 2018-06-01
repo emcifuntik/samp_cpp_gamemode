@@ -142,6 +142,12 @@
     <ClInclude Include="src\database\sqlite\sqlite3.h" />
     <ClInclude Include="src\entities\CPlayer.h" />
     <ClInclude Include="src\entities\CVehicle.h" />
+    <ClInclude Include="src\events\CBaseEvent.h" />
+    <ClInclude Include="src\events\game\CGameInited.h" />
+    <ClInclude Include="src\events\player\CPlayerCommand.h" />
+    <ClInclude Include="src\events\player\CPlayerConnect.h" />
+    <ClInclude Include="src\events\player\CPlayerDisconnect.h" />
+    <ClInclude Include="src\events\player\CPlayerSpawn.h" />
     <ClInclude Include="src\internal\amx\amx.h" />
     <ClInclude Include="src\internal\amx\getch.h" />
     <ClInclude Include="src\internal\amx\sclinux.h" />
@@ -149,9 +155,12 @@
     <ClInclude Include="src\internal\plugin.h" />
     <ClInclude Include="src\internal\plugincommon.h" />
     <ClInclude Include="src\internal\sampgdk\sampgdk.h" />
+    <ClInclude Include="src\managers\CGameManager.h" />
     <ClInclude Include="src\managers\CPlayerManager.h" />
+    <ClInclude Include="src\managers\CTimerManager.h" />
     <ClInclude Include="src\patterns\CSingleton.h" />
     <ClInclude Include="src\stdafx.h" />
+    <ClInclude Include="src\utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\CCommandProcessor.cpp" />
@@ -174,11 +183,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\managers\CGameManager.cpp" />
     <ClCompile Include="src\managers\CPlayerManager.cpp" />
+    <ClCompile Include="src\managers\CTimerManager.cpp" />
+    <ClCompile Include="src\scripting\Auth.cpp" />
+    <ClCompile Include="src\scripting\Init.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\export.def" />

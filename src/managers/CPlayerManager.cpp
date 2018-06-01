@@ -1,14 +1,5 @@
 #include "stdafx.h"
 
-CPlayerManager::CPlayerManager()
-{
-}
-
-
-CPlayerManager::~CPlayerManager()
-{
-}
-
 bool CPlayerManager::Connect(int playerid)
 {
   if (playerid > maxID)
@@ -22,6 +13,11 @@ bool CPlayerManager::Connect(int playerid)
   }
   return false;
 }
+bool CPlayerManager::OnConnect(std::function<bool(CPlayer*)> callback)
+{
+	this->connectHandlers.push_back(callback);
+	return true;
+}
 
 bool CPlayerManager::Spawn(int playerid)
 {
@@ -31,6 +27,11 @@ bool CPlayerManager::Spawn(int playerid)
     }
   }
   return false;
+}
+bool CPlayerManager::OnSpawn(std::function<bool(CPlayer*)> callback)
+{
+	this->spawnHandlers.push_back(callback);
+	return true;
 }
 
 bool CPlayerManager::Disconnect(int playerid, int reason)
@@ -55,22 +56,23 @@ bool CPlayerManager::Disconnect(int playerid, int reason)
   this->playersPool[playerid] = nullptr;
   return false;
 }
-
-bool CPlayerManager::OnConnect(std::function<bool(CPlayer*)> callback)
-{
-  this->connectHandlers.push_back(callback);
-  return true;
-}
-
-bool CPlayerManager::OnSpawn(std::function<bool(CPlayer*)> callback)
-{
-  this->spawnHandlers.push_back(callback);
-  return true;
-}
-
-
 bool CPlayerManager::OnDisconnect(std::function<bool(CPlayer*, int reason)> callback)
 {
-  this->disconnectHandlers.push_back(callback);
-  return true;
+	this->disconnectHandlers.push_back(callback);
+	return true;
+}
+
+
+PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerSpawn(int playerid) {
+	return CPlayerManager::get().Spawn(playerid);
+}
+
+PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDisconnect(int playerid, int reason) {
+	return CPlayerManager::get().Disconnect(playerid, reason);
+}
+
+PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerConnect(int playerid) {
+	CPlayer * player = CPlayerManager::get()[playerid];
+	CPlayerManager::get().Connect(playerid);
+	return true;
 }

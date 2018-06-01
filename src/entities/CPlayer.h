@@ -44,6 +44,13 @@ public:
 	bool ShowTablistHeadersDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback);
 	bool ShowInputtextDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback);
 	bool ShowPasswordDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback);
+
+	bool ShowChoiceDialog(const char * caption, const char * info, const char * button1, std::function<bool(bool)> callback) { ShowChoiceDialog(caption, info, button1, "", callback); }
+	bool ShowListboxDialog(const char * caption, const char * info, const char * button1, std::function<bool(int)> callback) { ShowListboxDialog(caption, info, button1, "", callback); }
+	bool ShowTablistDialog(const char * caption, const char * info, const char * button1, std::function<bool(int)> callback) { ShowTablistDialog(caption, info, button1, "", callback); }
+	bool ShowTablistHeadersDialog(const char * caption, const char * info, const char * button1, std::function<bool(int)> callback) { ShowTablistHeadersDialog(caption, info, button1, "", callback); }
+	bool ShowInputtextDialog(const char * caption, const char * info, const char * button1, std::function<bool(const char*)> callback) { ShowInputtextDialog(caption, info, button1, "", callback); }
+	bool ShowPasswordDialog(const char * caption, const char * info, const char * button1, std::function<bool(const char*)> callback) { ShowPasswordDialog(caption, info, button1, "", callback); }
 	bool HideDialog();
 
 	bool SendMessage(int color, const char * message);

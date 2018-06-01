@@ -673,3 +673,23 @@ bool CPlayer::StopRecordingData() {
 bool CPlayer::CreateExplosion(float X, float Y, float Z, int type, float Radius) {
   return sampgdk::CreateExplosionForPlayer(this->playerid, X, Y, Z, type, Radius);
 }
+
+
+PLUGIN_EXPORT bool PLUGIN_CALL OnDialogResponse(int playerid, int dialogid, int response, int listitem, const char * inputtext)
+{
+	CPlayer * player = CPlayerManager::get()[playerid];
+	if (player) {
+		switch (player->dialog.currentDialogStyle) {
+		case DialogStyle::Choice:
+			player->dialog.choiceCallback(response == 1);
+			break;
+		case DialogStyle::Input:
+			player->dialog.inputCallback(inputtext);
+			break;
+		case DialogStyle::List:
+			player->dialog.choiceCallback(listitem);
+			break;
+		}
+	}
+	return true;
+}

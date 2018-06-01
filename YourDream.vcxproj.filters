@@ -25,14 +25,26 @@
     <Filter Include="managers">
       <UniqueIdentifier>{d5099c2d-e6e0-4004-9b7c-9a92abfc7119}</UniqueIdentifier>
     </Filter>
+    <Filter Include="patterns">
+      <UniqueIdentifier>{40deb0ff-ac25-45a2-ad0b-8b695b75f85e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="events\player">
+      <UniqueIdentifier>{6098424a-1a5f-44e9-9361-c014c7875881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripting">
+      <UniqueIdentifier>{2a2d2501-356b-4239-a229-9c7b0098cc78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="events\game">
+      <UniqueIdentifier>{cabcff5b-0949-4943-944d-005131bb70d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{d2173abb-f857-45c2-bca3-07e85c81ff48}</UniqueIdentifier>
+    </Filter>
     <Filter Include="database">
       <UniqueIdentifier>{2c5f90bf-3b62-46d8-8c15-f18973a09696}</UniqueIdentifier>
     </Filter>
     <Filter Include="database\sqlite">
       <UniqueIdentifier>{11d8cc28-67e2-4ff3-ac5f-5fbc8c740b14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="patterns">
-      <UniqueIdentifier>{40deb0ff-ac25-45a2-ad0b-8b695b75f85e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +91,33 @@
       <Filter>patterns</Filter>
     </ClInclude>
     <ClInclude Include="src\stdafx.h" />
+    <ClInclude Include="src\events\CBaseEvent.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\player\CPlayerConnect.h">
+      <Filter>events\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\player\CPlayerDisconnect.h">
+      <Filter>events\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\player\CPlayerSpawn.h">
+      <Filter>events\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\player\CPlayerCommand.h">
+      <Filter>events\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\managers\CGameManager.h">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\game\CGameInited.h">
+      <Filter>events\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\managers\CTimerManager.h">
+      <Filter>managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\internal\sampgdk\sampgdk.c">
@@ -115,6 +154,21 @@
       <Filter>database</Filter>
     </ClCompile>
     <ClCompile Include="src\stdafx.cpp" />
+    <ClCompile Include="src\scripting\Auth.cpp">
+      <Filter>scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\managers\CGameManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripting\Init.cpp">
+      <Filter>scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\managers\CTimerManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\export.def" />

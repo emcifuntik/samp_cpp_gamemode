@@ -2,7 +2,7 @@
 
 #define sqlite3_column_float(stmt, pos) static_cast<float>(sqlite3_column_double(stmt, pos))
 
-class CDataBase
+class CDataBase: public CSingleton<CDataBase>
 {
 	sqlite3 * dbFile = nullptr;
 	const char* dbName = "database.sqlite";
@@ -57,13 +57,9 @@ CREATE TABLE IF NOT EXISTS vehicles (
 	FOREIGN KEY(vehicle_owner) REFERENCES users(user_id));
 )sql";
 	//DROP TABLE IF EXISTS users;
-	CDataBase();
 	~CDataBase();
 public:
-	static CDataBase& Get() {
-		static CDataBase instance;
-		return instance;
-	}
+	void Init();
 
 	bool UserRegistered(const char *username);
 	bool RegisterUser(const char * username, const char * password);

@@ -1,6 +1,11 @@
 #include "stdafx.h"
 
-CDataBase::CDataBase()
+CDataBase::~CDataBase()
+{
+	sqlite3_close(dbFile);
+}
+
+void CDataBase::Init()
 {
 	char *err = 0;
 	if (sqlite3_open(dbName, &dbFile)) {
@@ -15,13 +20,6 @@ CDataBase::CDataBase()
 			Log::Error << "[SQLite] Ошибка инициализации БД: " << sqlite3_errmsg(dbFile) << Log::Endl;
 		}
 	}
-	
-}
-
-
-CDataBase::~CDataBase()
-{
-	sqlite3_close(dbFile);
 }
 
 bool CDataBase::UserRegistered(const char * username)
@@ -57,7 +55,7 @@ bool CDataBase::UserRegistered(const char * username)
 
 bool CDataBase::RegisterUser(const char * username, const char * password)
 {
-	int passHash = CCommandProcessor::Get().jhash(password);
+	int passHash = jhash(password);
 	sqlite3_stmt *stmt;
 	const char* sql = "INSERT INTO users (user_name, user_password) VALUES (?, ?)";
 	if (sqlite3_prepare(dbFile, sql, strlen(sql), &stmt, nullptr)) {
@@ -92,7 +90,7 @@ bool CDataBase::RegisterUser(const char * username, const char * password)
 
 bool CDataBase::LoginUser(CPlayer* player, const char * username, const char * password)
 {
-	int passHash = CCommandProcessor::Get().jhash(password);
+	int passHash = jhash(password);
 	sqlite3_stmt *stmt;
 	const char* sql = "SELECT user_id, user_position_x, user_position_y, user_position_z, user_heading FROM users WHERE user_name = ? AND user_password = ?";
 	if (sqlite3_prepare(dbFile, sql, strlen(sql), &stmt, nullptr)) {

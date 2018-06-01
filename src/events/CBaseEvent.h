@@ -1,0 +1,7 @@
+
+namespace Event {
+	class CBase {
+
+	};
+};
+
