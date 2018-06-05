@@ -15,16 +15,11 @@ EXPORTS
 	;OnEnterExitModShop
 	OnGameModeExit
 	OnGameModeInit
-	;OnObjectMoved
 	;OnPlayerClickMap
 	;OnPlayerClickPlayer
 	;OnPlayerClickPlayerTextDraw
 	;OnPlayerClickTextDraw
 	;OnPlayerDeath
-	;OnPlayerEditAttachedObject
-	;OnPlayerEditObject
-	;OnPlayerEnterCheckpoint
-	;OnPlayerEnterRaceCheckpoint
 	;OnPlayerEnterVehicle
 	;OnPlayerExitVehicle
 	;OnPlayerExitedMenu
@@ -33,20 +28,13 @@ EXPORTS
 	;OnPlayerGiveDamageActor
 	;OnPlayerInteriorChange
 	;OnPlayerKeyStateChange
-	;OnPlayerLeaveCheckpoint
-	;OnPlayerLeaveRaceCheckpoint
-	;OnPlayerObjectMoved
-	;OnPlayerPickUpPickup
-	;OnPlayerPrivmsg
 	;OnPlayerRequestClass
 	;OnPlayerRequestSpawn
-	;OnPlayerSelectObject
 	;OnPlayerSelectedMenuRow
 	;OnPlayerStateChange
 	;OnPlayerStreamIn
 	;OnPlayerStreamOut
 	;OnPlayerTakeDamage
-	;OnPlayerTeamPrivmsg
 	;OnPlayerText
 	;OnPlayerUpdate
 	;OnPlayerWeaponShot

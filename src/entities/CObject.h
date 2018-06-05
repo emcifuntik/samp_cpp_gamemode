@@ -1,11 +1,12 @@
 
 class CObject {
+	friend class CObjectFactory;
 	int handler = -1;
 
 	CObject(int modelid, double x, double y, double z, double rx, double ry, double rz, int worldid = -1, int interiorid = -1, int playerid = -1, float streamdistance = STREAMER_OBJECT_SD, float drawdistance = STREAMER_OBJECT_DD, int areaid = -1, int priority = 0);
 	~CObject();
-
 public:
+	int GetID();
 	bool IsValid();
 	bool SetPosition(float x, float y, float z);
 	bool GetPosition(float * x, float * y, float * z);
@@ -16,11 +17,11 @@ public:
 	bool Move(float x, float y, float z, float speed, float rx = -1000.0, float ry = -1000.0, float rz = -1000.0);
 	bool StopMoving();
 	bool IsMoving();
-	bool AttachPlayerCamera(CPlayer*);
-	bool AttachToObject(CObject*, float offsetx, float offsety, float offsetz, float rx, float ry, float rz, int syncrotation = 1);
-	bool AttachToPlayer(CPlayer*, float offsetx, float offsety, float offsetz, float rx, float ry, float rz);
-	bool AttachToVehicle(CVehicle*, float offsetx, float offsety, float offsetz, float rx, float ry, float rz);
-	bool Edit(CPlayer*);
+	bool AttachPlayerCamera(CPlayer* player);
+	bool AttachToObject(CObject* object, float offsetx, float offsety, float offsetz, float rx, float ry, float rz, int syncrotation = 1);
+	bool AttachToPlayer(CPlayer* player, float offsetx, float offsety, float offsetz, float rx, float ry, float rz);
+	bool AttachToVehicle(CVehicle* vehicle, float offsetx, float offsety, float offsetz, float rx, float ry, float rz);
+	bool Edit(CPlayer* player);
 	bool IsMaterialUsed(int materialindex);
 	bool GetMaterial(int materialindex, int * modelid, char txdname[], char texturename[], int * materialcolor, int maxtxdname, int maxtexturename);
 	bool SetMaterial(int materialindex, int modelid, const char txdname[], const char texturename[], int materialcolor = 0);

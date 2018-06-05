@@ -55,6 +55,9 @@
     <Filter Include="vendor\streamer-invoke">
       <UniqueIdentifier>{bc95ef56-bbcc-4078-8685-2d8f2a4d5c1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="factories">
+      <UniqueIdentifier>{b332bde9-5681-4f23-94a2-ad8698797b8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\internal\logging\Log.h">
@@ -136,6 +139,12 @@
     <ClInclude Include="src\entities\CObject.h">
       <Filter>entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\factories\CObjectFactory.h">
+      <Filter>factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\CVehicleFactory.h">
+      <Filter>factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\internal\sampgdk\sampgdk.c">
@@ -198,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="src\entities\CObject.cpp">
       <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\CObjectFactory.cpp">
+      <Filter>factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\CVehicleFactory.cpp">
+      <Filter>factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

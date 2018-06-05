@@ -11,49 +11,61 @@ CPlayer::~CPlayer()
 
 bool CPlayer::ShowChoiceDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(bool)> callback)
 {
-	this->dialog.currentDialogStyle = DialogStyle::Choice;
-	this->dialog.choiceCallback = callback;
+	if (callback)
+		this->dialogCallback = callback;
+	else
+		this->dialogCallback.operator=<bool>(false);
 	return sampgdk::ShowPlayerDialog(this->playerid, DIALOG_ID_DEFAULT, DIALOG_STYLE_MSGBOX, caption, info, button1, button2);
 }
 
 bool CPlayer::ShowListboxDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback)
 {
-	this->dialog.currentDialogStyle = DialogStyle::List;
-	this->dialog.listboxCallback = callback;
+	if (callback)
+		this->dialogCallback = callback;
+	else
+		this->dialogCallback.operator=<bool>(false);
 	return sampgdk::ShowPlayerDialog(this->playerid, DIALOG_ID_DEFAULT, DIALOG_STYLE_LIST, caption, info, button1, button2);
 }
 
 bool CPlayer::ShowTablistDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback)
 {
-	this->dialog.currentDialogStyle = DialogStyle::List;
-	this->dialog.listboxCallback = callback;
+	if (callback)
+		this->dialogCallback = callback;
+	else
+		this->dialogCallback.operator=<bool>(false);
 	return sampgdk::ShowPlayerDialog(this->playerid, DIALOG_ID_DEFAULT, DIALOG_STYLE_TABLIST, caption, info, button1, button2);
 }
 
 bool CPlayer::ShowTablistHeadersDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback)
 {
-	this->dialog.currentDialogStyle = DialogStyle::List;
-	this->dialog.listboxCallback = callback;
+	if (callback)
+		this->dialogCallback = callback;
+	else
+		this->dialogCallback.operator=<bool>(false);
 	return sampgdk::ShowPlayerDialog(this->playerid, DIALOG_ID_DEFAULT, DIALOG_STYLE_TABLIST_HEADERS, caption, info, button1, button2);
 }
 
 bool CPlayer::ShowInputtextDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback)
 {
-	this->dialog.currentDialogStyle = DialogStyle::Input;
-	this->dialog.inputCallback = callback;
+	if (callback)
+		this->dialogCallback = callback;
+	else
+		this->dialogCallback.operator=<bool>(false);
 	return sampgdk::ShowPlayerDialog(this->playerid, DIALOG_ID_DEFAULT, DIALOG_STYLE_INPUT, caption, info, button1, button2);
 }
 
 bool CPlayer::ShowPasswordDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback)
 {
-	this->dialog.currentDialogStyle = DialogStyle::Input;
-	this->dialog.inputCallback = callback;
+	if (callback)
+		this->dialogCallback = callback;
+	else
+		this->dialogCallback.operator=<bool>(false);
 	return sampgdk::ShowPlayerDialog(this->playerid, DIALOG_ID_DEFAULT, DIALOG_STYLE_PASSWORD, caption, info, button1, button2);
 }
 
 bool CPlayer::HideDialog()
 {
-	this->dialog.currentDialogStyle = DialogStyle::None;
+	this->dialogCallback.operator=<bool>(false);
 	return sampgdk::ShowPlayerDialog(this->playerid, -1, 0, "", "", "", "");
 }
 
@@ -224,6 +236,11 @@ int CPlayer::GetState() {
 
 bool CPlayer::GetIp(char * ip, int size) {
   return sampgdk::GetPlayerIp(this->playerid, ip, size);
+}
+
+int CPlayer::GetID()
+{
+	return playerid;
 }
 
 int CPlayer::GetPing() {
@@ -679,18 +696,15 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnDialogResponse(int playerid, int dialogid, int 
 {
 	CPlayer * player = CPlayerManager::get()[playerid];
 	if (player) {
-		switch (player->dialog.currentDialogStyle) {
-		case DialogStyle::Choice:
-			if(player->dialog.choiceCallback)
-				player->dialog.choiceCallback(response == 1);
+		switch (player->dialogCallback.index()) {
+		case 0:
+			std::get<0>(player->dialogCallback)(response == 1);
 			break;
-		case DialogStyle::Input:
-			if(player->dialog.inputCallback)
-				player->dialog.inputCallback(inputtext);
+		case 1:
+			std::get<1>(player->dialogCallback)(listitem);
 			break;
-		case DialogStyle::List:
-			if(player->dialog.choiceCallback)
-				player->dialog.choiceCallback(listitem);
+		case 2:
+			std::get<2>(player->dialogCallback)(inputtext);
 			break;
 		}
 	}

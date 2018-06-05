@@ -13,6 +13,11 @@ CVehicle::~CVehicle()
 	sampgdk::DestroyVehicle(this->id);
 }
 
+int CVehicle::GetID()
+{
+	return id;
+}
+
 bool CVehicle::IsValid() {
 	return sampgdk::IsValidVehicle(this->id);
 }

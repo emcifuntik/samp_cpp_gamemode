@@ -151,6 +151,8 @@
     <ClInclude Include="src\events\player\CPlayerConnect.h" />
     <ClInclude Include="src\events\player\CPlayerDisconnect.h" />
     <ClInclude Include="src\events\player\CPlayerSpawn.h" />
+    <ClInclude Include="src\factories\CObjectFactory.h" />
+    <ClInclude Include="src\factories\CVehicleFactory.h" />
     <ClInclude Include="src\internal\amx\amx.h" />
     <ClInclude Include="src\internal\amx\getch.h" />
     <ClInclude Include="src\internal\amx\sclinux.h" />
@@ -179,6 +181,8 @@
     <ClCompile Include="src\entities\CObject.cpp" />
     <ClCompile Include="src\entities\CPlayer.cpp" />
     <ClCompile Include="src\entities\CVehicle.cpp" />
+    <ClCompile Include="src\factories\CObjectFactory.cpp" />
+    <ClCompile Include="src\factories\CVehicleFactory.cpp" />
     <ClCompile Include="src\internal\amxplugin.cpp" />
     <ClCompile Include="src\internal\main.cpp" />
     <ClCompile Include="src\internal\playerActions.cpp" />

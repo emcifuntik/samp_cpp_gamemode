@@ -1,10 +1,12 @@
 #pragma once
 class CVehicle
 {
+	friend class CVehicleFactory;
 	int id;
-public:
 	CVehicle(int model, float x, float y, float z, float a, int color1, int color2, int respawnDelay = 0, bool addSiren = false);
 	~CVehicle();
+public:
+	int GetID();
 	bool IsValid();
 	float GetDistanceFromPoint(float x, float y, float z);
 	bool IsStreamedIn(int forplayerid);

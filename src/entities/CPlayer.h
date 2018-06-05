@@ -5,20 +5,6 @@
 
 class CPlayer;
 
-typedef enum tagDialogStyle{
-	None,
-	Choice,
-	List,
-	Input
-} DialogStyle;
-
-struct DialogData {
-	DialogStyle currentDialogStyle = DialogStyle::None;
-	std::function<bool(bool)> choiceCallback = nullptr;
-	std::function<bool(int)> listboxCallback = nullptr;
-	std::function<bool(const char*)> inputCallback = nullptr;
-};
-
 struct Position {
 	float x;
 	float y;
@@ -29,7 +15,7 @@ class CPlayer
 {
 	unsigned short playerid;
 public:
-	DialogData dialog;
+	std::variant<std::function<bool(bool)>, std::function<bool(int)>, std::function<bool(const char*)>, bool> dialogCallback;
 	bool loggedIn = false;
 	Position lastPosition = { 0, 0, 0 };
 	float heading = 0.f;
@@ -39,22 +25,19 @@ public:
 	~CPlayer();
 	
 	bool ShowChoiceDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(bool)> callback = nullptr);
-	bool ShowListboxDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback = nullptr);
-	bool ShowTablistDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback = nullptr);
-	bool ShowTablistHeadersDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback = nullptr);
-	bool ShowInputtextDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback = nullptr);
-	bool ShowPasswordDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback = nullptr);
-
 	bool ShowChoiceDialog(const char * caption, const char * info, const char * button1, std::function<bool(bool)> callback = nullptr) { return ShowChoiceDialog(caption, info, button1, "", callback); }
+	bool ShowListboxDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback = nullptr);
 	bool ShowListboxDialog(const char * caption, const char * info, const char * button1, std::function<bool(int)> callback = nullptr) { return ShowListboxDialog(caption, info, button1, "", callback); }
+	bool ShowTablistDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback = nullptr);
 	bool ShowTablistDialog(const char * caption, const char * info, const char * button1, std::function<bool(int)> callback = nullptr) { return ShowTablistDialog(caption, info, button1, "", callback); }
+	bool ShowTablistHeadersDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback = nullptr);
 	bool ShowTablistHeadersDialog(const char * caption, const char * info, const char * button1, std::function<bool(int)> callback = nullptr) { return ShowTablistHeadersDialog(caption, info, button1, "", callback); }
+	bool ShowInputtextDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback = nullptr);
 	bool ShowInputtextDialog(const char * caption, const char * info, const char * button1, std::function<bool(const char*)> callback = nullptr) { return ShowInputtextDialog(caption, info, button1, "", callback); }
+	bool ShowPasswordDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(const char*)> callback = nullptr);
 	bool ShowPasswordDialog(const char * caption, const char * info, const char * button1, std::function<bool(const char*)> callback = nullptr) { return ShowPasswordDialog(caption, info, button1, "", callback); }
 	bool HideDialog();
-
 	bool SendMessage(int color, const char * message);
-
 	bool SetSpawnInfo(int team, int skin, float x, float y, float z, float rotation, int weapon1, int weapon1_ammo, int weapon2, int weapon2_ammo, int weapon3, int weapon3_ammo);
 	bool Spawn();
 	bool SetPos(float x, float y, float z);
@@ -96,6 +79,7 @@ public:
 	int GetMoney();
 	int GetState();
 	bool GetIp(char * ip, int size);
+	int GetID();
 	int GetPing();
 	int GetWeapon();
 	bool GetKeys(int * keys, int * updown, int * leftright);

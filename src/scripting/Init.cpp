@@ -11,5 +11,6 @@ Event::CGameInited GameInited([]() {
 
 	CDataBase::get().Init();
 
+	CVehicleFactory::get().Create(520, 0, 0, 70, 0, 0, 0);
 	return true;
 });

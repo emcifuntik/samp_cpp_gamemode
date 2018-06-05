@@ -37,6 +37,10 @@
 #include "managers\CGameManager.h"
 #include "managers\CTimerManager.h"
 
+//Factories
+#include "factories\CVehicleFactory.h"
+#include "factories\CObjectFactory.h"
+
 //Command processor
 #include "core\CCommandProcessor.h"
 
