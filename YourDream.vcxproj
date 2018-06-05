@@ -72,12 +72,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
-    <IncludePath>./src;./src/internal;$(IncludePath)</IncludePath>
+    <IncludePath>./src;./src/internal;./src/vendor;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
-    <IncludePath>./src;./src/internal;$(IncludePath)</IncludePath>
+    <IncludePath>./src;./src/internal;./src/vendor;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -142,6 +142,7 @@
     <ClInclude Include="src\core\CCommandProcessor.h" />
     <ClInclude Include="src\database\CDataBase.h" />
     <ClInclude Include="src\database\sqlite\sqlite3.h" />
+    <ClInclude Include="src\entities\CObject.h" />
     <ClInclude Include="src\entities\CPlayer.h" />
     <ClInclude Include="src\entities\CVehicle.h" />
     <ClInclude Include="src\events\CBaseEvent.h" />
@@ -163,6 +164,8 @@
     <ClInclude Include="src\patterns\CSingleton.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\utils\Utils.h" />
+    <ClInclude Include="src\vendor\main.hpp" />
+    <ClInclude Include="src\vendor\streamer-invoke\streamer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\CCommandProcessor.cpp" />
@@ -173,6 +176,7 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
     </ClCompile>
+    <ClCompile Include="src\entities\CObject.cpp" />
     <ClCompile Include="src\entities\CPlayer.cpp" />
     <ClCompile Include="src\entities\CVehicle.cpp" />
     <ClCompile Include="src\internal\amxplugin.cpp" />
@@ -196,6 +200,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\utils\Utils.cpp" />
+    <ClCompile Include="src\vendor\streamer-invoke\callbacks.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\vendor\streamer-invoke\streamer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\export.def" />

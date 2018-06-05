@@ -24,9 +24,13 @@
 #include "internal\plugin.h"
 #include "internal\logging\Log.h"
 
+//Streamer
+#include "vendor\streamer-invoke\streamer.hpp"
+
 //Entities
 #include "entities\CPlayer.h"
 #include "entities\CVehicle.h"
+#include "entities\CObject.h"
 
 //Managers
 #include "managers\CPlayerManager.h"

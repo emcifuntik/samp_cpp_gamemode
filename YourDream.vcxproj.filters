@@ -49,6 +49,12 @@
     <Filter Include="scripting\commands">
       <UniqueIdentifier>{bb99d92b-a8dd-4d52-b948-c025deb7a848}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{7b6702ee-c975-4e5b-a511-cd22b0e128e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\streamer-invoke">
+      <UniqueIdentifier>{bc95ef56-bbcc-4078-8685-2d8f2a4d5c1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\internal\logging\Log.h">
@@ -121,6 +127,15 @@
     <ClInclude Include="src\managers\CTimerManager.h">
       <Filter>managers</Filter>
     </ClInclude>
+    <ClInclude Include="src\vendor\streamer-invoke\streamer.hpp">
+      <Filter>vendor\streamer-invoke</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\main.hpp">
+      <Filter>vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\CObject.h">
+      <Filter>entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\internal\sampgdk\sampgdk.c">
@@ -174,6 +189,15 @@
     </ClCompile>
     <ClCompile Include="src\scripting\commands\Helps.cpp">
       <Filter>scripting\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\streamer-invoke\streamer.cpp">
+      <Filter>vendor\streamer-invoke</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\streamer-invoke\callbacks.cpp">
+      <Filter>vendor\streamer-invoke</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\CObject.cpp">
+      <Filter>entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
