@@ -18,17 +18,3 @@ bool HelpMessage(CPlayer * player, std::vector<std::string> params) {
 //	}
 //}
 
-PLUGIN_EXPORT bool PLUGIN_CALL OnGameModeInit() {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-
-	Log& log = Log::get();
-	log.AddOut(&std::wcout);
-	sampgdk::SetGameModeText("C++ Private");
-	//sampgdk::SetTimer(1000, true, WorldTimeChanger, 0);
-
-	CDataBase::Get();
-
-	//CCommandProcessor::Get().Add("/help", HelpMessage);
-	return true;
-}

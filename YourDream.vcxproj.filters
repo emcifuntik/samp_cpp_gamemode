@@ -46,6 +46,9 @@
     <Filter Include="database\sqlite">
       <UniqueIdentifier>{11d8cc28-67e2-4ff3-ac5f-5fbc8c740b14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scripting\commands">
+      <UniqueIdentifier>{bb99d92b-a8dd-4d52-b948-c025deb7a848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\internal\logging\Log.h">
@@ -168,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="src\managers\CTimerManager.cpp">
       <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripting\commands\Helps.cpp">
+      <Filter>scripting\commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

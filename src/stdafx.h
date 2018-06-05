@@ -8,7 +8,10 @@
 #include <vector>
 #include <iostream>
 #include <functional>
+#include <variant>
 #include <map>
+#include <unordered_map>
+#include <sstream>
 
 //Patterns
 #include "patterns\CSingleton.h"

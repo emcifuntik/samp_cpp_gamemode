@@ -6,7 +6,7 @@ Event::CGameInited GameInited([]() {
 
 	Log& log = Log::get();
 	log.AddOut(&std::wcout);
-	sampgdk::SetGameModeText("C++ Private");
+	sampgdk::SetGameModeText("C++ Private Development");
 	//sampgdk::SetTimer(1000, true, WorldTimeChanger, 0);
 
 	CDataBase::get().Init();

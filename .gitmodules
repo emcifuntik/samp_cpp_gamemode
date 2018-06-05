@@ -1,0 +1,3 @@
+[submodule "src/vendor/streamer-invoke"]
+	path = src/vendor/streamer-invoke
+	url = https://github.com/IstuntmanI/samp-streamer-plugin-sampgdk-invoke.git

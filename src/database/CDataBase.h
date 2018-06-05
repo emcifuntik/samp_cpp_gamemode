@@ -4,6 +4,8 @@
 
 class CDataBase: public CSingleton<CDataBase>
 {
+	friend class CSingleton<CDataBase>;
+
 	sqlite3 * dbFile = nullptr;
 	const char* dbName = "database.sqlite";
 	const char* playersInitialQuery = 

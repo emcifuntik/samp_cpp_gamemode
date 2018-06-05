@@ -681,13 +681,16 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnDialogResponse(int playerid, int dialogid, int 
 	if (player) {
 		switch (player->dialog.currentDialogStyle) {
 		case DialogStyle::Choice:
-			player->dialog.choiceCallback(response == 1);
+			if(player->dialog.choiceCallback)
+				player->dialog.choiceCallback(response == 1);
 			break;
 		case DialogStyle::Input:
-			player->dialog.inputCallback(inputtext);
+			if(player->dialog.inputCallback)
+				player->dialog.inputCallback(inputtext);
 			break;
 		case DialogStyle::List:
-			player->dialog.choiceCallback(listitem);
+			if(player->dialog.choiceCallback)
+				player->dialog.choiceCallback(listitem);
 			break;
 		}
 	}
