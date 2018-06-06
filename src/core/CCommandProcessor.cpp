@@ -27,7 +27,7 @@ bool CCommandProcessor::EmitCommand(const std::string &cmd, int playerid)
 	std::string command = params.front();
 	params.erase(params.begin());
 	
-	auto list = hashMap.equal_range(cmd);
+	auto list = hashMap.equal_range(command);
 	
 	for (auto iter = list.first; iter != list.second; ++iter) {
 		int index = iter->second.index();

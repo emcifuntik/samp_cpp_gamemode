@@ -3,11 +3,13 @@ class CVehicle
 {
 	friend class CVehicleFactory;
 	int id;
+	int model;
 	CVehicle(int model, float x, float y, float z, float a, int color1, int color2, int respawnDelay = 0, bool addSiren = false);
 	~CVehicle();
 public:
 	int GetID();
 	bool IsValid();
+	const std::string& GetName();
 	float GetDistanceFromPoint(float x, float y, float z);
 	bool IsStreamedIn(int forplayerid);
 	bool GetPos(float * x, float * y, float * z);

@@ -26,7 +26,7 @@ bool CPlayerManager::Spawn(int playerid)
       return true;
     }
   }
-  return false;
+  return true;
 }
 bool CPlayerManager::OnSpawn(std::function<bool(CPlayer*)> callback)
 {
@@ -54,7 +54,7 @@ bool CPlayerManager::Disconnect(int playerid, int reason)
   }
   delete this->playersPool[playerid];
   this->playersPool[playerid] = nullptr;
-  return false;
+  return true;
 }
 bool CPlayerManager::OnDisconnect(std::function<bool(CPlayer*, int reason)> callback)
 {

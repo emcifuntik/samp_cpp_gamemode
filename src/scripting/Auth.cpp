@@ -3,19 +3,19 @@
 Event::CPlayerConnect Connect([](CPlayer* player) {
 	player->SetSpawnInfo(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	player->SendMessage(0x00AA00FF, "Добро пожаловать");
-	return true;
+	return false;
 });
 
 Event::CPlayerDisconnect Disconnect([](CPlayer * player, int reason) {
 	if (player->loggedIn) {
 		float x, y, z, a;
-		player->GetPos(&x, &y, &z);
-		player->GetFacingAngle(&a);
+		player->GetPos(x, y, z);
+		player->GetFacingAngle(a);
 		player->lastPosition = { x, y, z };
 		player->heading = a;
 		CDataBase::get().SaveUser(player);
 	}
-	return true;
+	return false;
 });
 
 Event::CPlayerSpawn Spawn([](CPlayer * player) {
@@ -31,7 +31,7 @@ Event::CPlayerSpawn Spawn([](CPlayer * player) {
 		bool registered = CDataBase::get().UserRegistered(playerName);
 
 		if (!registered) {
-			player->ShowPasswordDialog("{FFFFFF}Добро пожаловать на {00AA00}YourDream Roleplay", "Введите пароль чтобы зарегистрироваться на сервере!", "Далее", DIALOG_NO_BUTTON, [player, playerName](const char* password) {
+			player->ShowPasswordDialog("{FFFFFF}Добро пожаловать на {00AA00}YourDream Roleplay", "Введите пароль чтобы зарегистрироваться на сервере!", "Далее", [player, playerName](const char* password) {
 				bool isRegistered = CDataBase::get().RegisterUser(playerName, password);
 				if (isRegistered) {
 					player->SendMessage(0x00FF00FF, " Вы успешно зарегистрировались на сервере");
@@ -42,7 +42,7 @@ Event::CPlayerSpawn Spawn([](CPlayer * player) {
 			});
 		}
 		else {
-			player->ShowPasswordDialog("{FFFFFF}Добро пожаловать на {00AA00}YourDream Roleplay", "Вы зарегистрированы.\nВведите свой пароль!", "Войти", DIALOG_NO_BUTTON, [player, playerName](const char* password) {
+			player->ShowPasswordDialog("{FFFFFF}Добро пожаловать на {00AA00}YourDream Roleplay", "Вы зарегистрированы.\nВведите свой пароль!", "Войти", [player, playerName](const char* password) {
 				bool loggedIn = CDataBase::get().LoginUser(player, playerName, password);
 				if (!loggedIn) {
 					player->SendMessage(0x00FF00FF, " Пароль введён не верно. Вы были кикнуты с сервера");
@@ -59,5 +59,5 @@ Event::CPlayerSpawn Spawn([](CPlayer * player) {
 			});
 		}
 	}
-	return true;
+	return false;
 });

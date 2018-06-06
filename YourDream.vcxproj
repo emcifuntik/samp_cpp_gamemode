@@ -93,7 +93,7 @@
       <ModuleDefinitionFile>./src/export.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutputPath)$(TargetFileName)" "$(SolutionDir)..\..\server\plugins\$(TargetFileName)"</Command>
+      <Command>copy "$(OutputPath)$(TargetFileName)" "e:\Projects\GTA\server\plugins\$(TargetFileName)"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Autocopy to server folder</Message>
@@ -123,6 +123,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(OutputPath)$(TargetFileName)" "e:\Projects\GTA\server\plugins\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Autocopy to server folder</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -141,8 +147,13 @@
   <ItemGroup>
     <ClInclude Include="src\core\CCommandProcessor.h" />
     <ClInclude Include="src\database\CDataBase.h" />
+    <ClInclude Include="src\database\CDataCell.h" />
+    <ClInclude Include="src\database\CPlayerData.h" />
     <ClInclude Include="src\database\sqlite\sqlite3.h" />
+    <ClInclude Include="src\entities\CActor.h" />
+    <ClInclude Include="src\entities\CArea.h" />
     <ClInclude Include="src\entities\CObject.h" />
+    <ClInclude Include="src\entities\CPickup.h" />
     <ClInclude Include="src\entities\CPlayer.h" />
     <ClInclude Include="src\entities\CVehicle.h" />
     <ClInclude Include="src\events\CBaseEvent.h" />
@@ -151,11 +162,14 @@
     <ClInclude Include="src\events\player\CPlayerConnect.h" />
     <ClInclude Include="src\events\player\CPlayerDisconnect.h" />
     <ClInclude Include="src\events\player\CPlayerSpawn.h" />
+    <ClInclude Include="src\factories\CActorFactory.h" />
     <ClInclude Include="src\factories\CObjectFactory.h" />
+    <ClInclude Include="src\factories\CPickupFactory.h" />
     <ClInclude Include="src\factories\CVehicleFactory.h" />
     <ClInclude Include="src\internal\amx\amx.h" />
     <ClInclude Include="src\internal\amx\getch.h" />
     <ClInclude Include="src\internal\amx\sclinux.h" />
+    <ClInclude Include="src\internal\colors.h" />
     <ClInclude Include="src\internal\logging\Log.h" />
     <ClInclude Include="src\internal\plugin.h" />
     <ClInclude Include="src\internal\plugincommon.h" />
@@ -178,10 +192,15 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
     </ClCompile>
+    <ClCompile Include="src\entities\CActor.cpp" />
+    <ClCompile Include="src\entities\CArea.cpp" />
     <ClCompile Include="src\entities\CObject.cpp" />
+    <ClCompile Include="src\entities\CPickup.cpp" />
     <ClCompile Include="src\entities\CPlayer.cpp" />
     <ClCompile Include="src\entities\CVehicle.cpp" />
+    <ClCompile Include="src\factories\CActorFactory.cpp" />
     <ClCompile Include="src\factories\CObjectFactory.cpp" />
+    <ClCompile Include="src\factories\CPickupFactory.cpp" />
     <ClCompile Include="src\factories\CVehicleFactory.cpp" />
     <ClCompile Include="src\internal\amxplugin.cpp" />
     <ClCompile Include="src\internal\main.cpp" />
@@ -197,8 +216,10 @@
     <ClCompile Include="src\managers\CPlayerManager.cpp" />
     <ClCompile Include="src\managers\CTimerManager.cpp" />
     <ClCompile Include="src\scripting\Auth.cpp" />
+    <ClCompile Include="src\scripting\commands\Admin.cpp" />
     <ClCompile Include="src\scripting\commands\Helps.cpp" />
     <ClCompile Include="src\scripting\Init.cpp" />
+    <ClCompile Include="src\scripting\OwnedCars.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

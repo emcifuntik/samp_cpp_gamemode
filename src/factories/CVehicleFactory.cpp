@@ -10,7 +10,7 @@ CVehicle * CVehicleFactory::Create(int model, float x, float y, float z, float a
 bool CVehicleFactory::Destroy(CVehicle * vehicle)
 {
 	if (vehicle) {
-		delete[] vehicle;
+		delete vehicle;
 		return true;
 	}
 	return false;
@@ -19,7 +19,7 @@ bool CVehicleFactory::Destroy(CVehicle * vehicle)
 void CVehicleFactory::DestroyAll()
 {
 	for (CVehicle* veh : pool) {
-		delete[] veh;
+		delete veh;
 	}
 	pool.clear();
 }

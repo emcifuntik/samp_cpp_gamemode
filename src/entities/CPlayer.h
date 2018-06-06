@@ -1,9 +1,8 @@
 #pragma once
-#include "stdafx.h"
-#define DIALOG_NO_BUTTON ""
 #define DIALOG_ID_DEFAULT 0
+#undef SendMessage
 
-class CPlayer;
+class CVehicle;
 
 struct Position {
 	float x;
@@ -42,9 +41,9 @@ public:
 	bool Spawn();
 	bool SetPos(float x, float y, float z);
 	bool SetPosFindZ(float x, float y, float z);
-	bool GetPos(float * x, float * y, float * z);
+	bool GetPos(float &x, float &y, float &z);
 	bool SetFacingAngle(float angle);
-	bool GetFacingAngle(float * angle);
+	bool GetFacingAngle(float &angle);
 	bool IsInRangeOfPoint(float range, float x, float y, float z);
 	float GetDistanceFromPoint(float x, float y, float z);
 	bool IsStreamedIn(int forplayerid);
@@ -139,7 +138,7 @@ public:
 	bool GetPVarNameAtIndex(int index, char * varname, int size);
 	int GetPVarType(const char * varname);
 	bool SetChatBubble(const char * text, int color, float drawdistance, int expiretime);
-	bool PutInVehicle(int vehicleid, int seatid);
+	bool PutInVehicle(CVehicle* vehicle, int seatid);
 	int GetVehicleID();
 	int GetVehicleSeat();
 	bool RemoveFromVehicle();

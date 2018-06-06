@@ -23,6 +23,7 @@
 #include "internal\sampgdk\sampgdk.h"
 #include "internal\plugin.h"
 #include "internal\logging\Log.h"
+#include "internal\colors.h"
 
 //Streamer
 #include "vendor\streamer-invoke\streamer.hpp"
@@ -31,6 +32,9 @@
 #include "entities\CPlayer.h"
 #include "entities\CVehicle.h"
 #include "entities\CObject.h"
+#include "entities\CArea.h"
+#include "entities\CActor.h"
+#include "entities\CPickup.h"
 
 //Managers
 #include "managers\CPlayerManager.h"
@@ -40,6 +44,8 @@
 //Factories
 #include "factories\CVehicleFactory.h"
 #include "factories\CObjectFactory.h"
+#include "factories\CPickupFactory.h"
+#include "factories\CActorFactory.h"
 
 //Command processor
 #include "core\CCommandProcessor.h"
@@ -47,6 +53,8 @@
 //Database
 #include "database\sqlite\sqlite3.h"
 #include "database\CDataBase.h"
+#include "database\CDataCell.h"
+#include "database\CPlayerData.h"
 
 //Events
 #include "events\CBaseEvent.h"

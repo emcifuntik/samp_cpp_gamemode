@@ -145,6 +145,30 @@
     <ClInclude Include="src\factories\CVehicleFactory.h">
       <Filter>factories</Filter>
     </ClInclude>
+    <ClInclude Include="src\database\CDataCell.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database\CPlayerData.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\CPickup.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\CPickupFactory.h">
+      <Filter>factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\colors.h">
+      <Filter>internal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\CArea.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\CActor.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\CActorFactory.h">
+      <Filter>factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\internal\sampgdk\sampgdk.c">
@@ -212,6 +236,27 @@
       <Filter>factories</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\CVehicleFactory.cpp">
+      <Filter>factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\CPickup.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\CPickupFactory.cpp">
+      <Filter>factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\CArea.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripting\commands\Admin.cpp">
+      <Filter>scripting\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripting\OwnedCars.cpp">
+      <Filter>scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\CActor.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\CActorFactory.cpp">
       <Filter>factories</Filter>
     </ClCompile>
   </ItemGroup>
