@@ -218,6 +218,7 @@
     <ClCompile Include="src\scripting\Auth.cpp" />
     <ClCompile Include="src\scripting\commands\Admin.cpp" />
     <ClCompile Include="src\scripting\commands\Helps.cpp" />
+    <ClCompile Include="src\scripting\Houses.cpp" />
     <ClCompile Include="src\scripting\Init.cpp" />
     <ClCompile Include="src\scripting\OwnedCars.cpp" />
     <ClCompile Include="src\stdafx.cpp">

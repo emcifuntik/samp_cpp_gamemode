@@ -259,6 +259,9 @@
     <ClCompile Include="src\factories\CActorFactory.cpp">
       <Filter>factories</Filter>
     </ClCompile>
+    <ClCompile Include="src\scripting\Houses.cpp">
+      <Filter>scripting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\export.def" />

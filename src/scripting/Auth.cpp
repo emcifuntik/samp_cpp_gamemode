@@ -1,24 +1,10 @@
 #include "stdafx.h"
 
 Event::CPlayerConnect Connect([](CPlayer* player) {
+	player->ToggleSpectating(true);
 	player->SetSpawnInfo(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	player->SendMessage(0x00AA00FF, "Добро пожаловать");
-	return false;
-});
-
-Event::CPlayerDisconnect Disconnect([](CPlayer * player, int reason) {
-	if (player->loggedIn) {
-		float x, y, z, a;
-		player->GetPos(x, y, z);
-		player->GetFacingAngle(a);
-		player->lastPosition = { x, y, z };
-		player->heading = a;
-		CDataBase::get().SaveUser(player);
-	}
-	return false;
-});
-
-Event::CPlayerSpawn Spawn([](CPlayer * player) {
+	
 	if (!player->loggedIn) {
 		int hours, minutes;
 		GetInGameTime(hours, minutes);
@@ -59,5 +45,22 @@ Event::CPlayerSpawn Spawn([](CPlayer * player) {
 			});
 		}
 	}
+	return false;
+});
+
+Event::CPlayerDisconnect Disconnect([](CPlayer * player, int reason) {
+	if (player->loggedIn) {
+		float x, y, z, a;
+		player->GetPos(x, y, z);
+		player->GetFacingAngle(a);
+		player->lastPosition = { x, y, z };
+		player->heading = a;
+		CDataBase::get().SaveUser(player);
+	}
+	return false;
+});
+
+Event::CPlayerSpawn Spawn([](CPlayer * player) {
+	
 	return false;
 });
