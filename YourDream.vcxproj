@@ -166,6 +166,8 @@
     <ClInclude Include="src\factories\CObjectFactory.h" />
     <ClInclude Include="src\factories\CPickupFactory.h" />
     <ClInclude Include="src\factories\CVehicleFactory.h" />
+    <ClInclude Include="src\game\CGameDataLoader.h" />
+    <ClInclude Include="src\game\CLoaderIPL.h" />
     <ClInclude Include="src\internal\amx\amx.h" />
     <ClInclude Include="src\internal\amx\getch.h" />
     <ClInclude Include="src\internal\amx\sclinux.h" />
@@ -202,6 +204,8 @@
     <ClCompile Include="src\factories\CObjectFactory.cpp" />
     <ClCompile Include="src\factories\CPickupFactory.cpp" />
     <ClCompile Include="src\factories\CVehicleFactory.cpp" />
+    <ClCompile Include="src\game\CGameDataLoader.cpp" />
+    <ClCompile Include="src\game\CLoaderIPL.cpp" />
     <ClCompile Include="src\internal\amxplugin.cpp" />
     <ClCompile Include="src\internal\main.cpp" />
     <ClCompile Include="src\internal\playerActions.cpp" />

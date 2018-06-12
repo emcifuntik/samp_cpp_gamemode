@@ -58,6 +58,9 @@
     <Filter Include="factories">
       <UniqueIdentifier>{b332bde9-5681-4f23-94a2-ad8698797b8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{70f14506-b5a8-4621-8d1a-cd0e4c99d08e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\internal\logging\Log.h">
@@ -169,6 +172,12 @@
     <ClInclude Include="src\factories\CActorFactory.h">
       <Filter>factories</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\CGameDataLoader.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\CLoaderIPL.h">
+      <Filter>game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\internal\sampgdk\sampgdk.c">
@@ -261,6 +270,12 @@
     </ClCompile>
     <ClCompile Include="src\scripting\Houses.cpp">
       <Filter>scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\CGameDataLoader.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\CLoaderIPL.cpp">
+      <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

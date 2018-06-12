@@ -10,6 +10,8 @@ Event::CGameInited GameInited([]() {
 	sampgdk::DisableInteriorEnterExits();
 	sampgdk::EnableStuntBonusForAll(false);
 
+	Game::CGameDataLoader::get().LoadIPLs("./gamedata/maps");
+
 	//sampgdk::SetTimer(1000, true, WorldTimeChanger, 0);
 
 	CDataBase::get().Init();

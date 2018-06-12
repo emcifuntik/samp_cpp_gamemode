@@ -12,6 +12,7 @@
 #include <map>
 #include <unordered_map>
 #include <sstream>
+#include <filesystem>
 
 //Patterns
 #include "patterns\CSingleton.h"
@@ -27,6 +28,9 @@
 
 //Streamer
 #include "vendor\streamer-invoke\streamer.hpp"
+
+//Game
+#include "game\CGameDataLoader.h"
 
 //Entities
 #include "entities\CPlayer.h"

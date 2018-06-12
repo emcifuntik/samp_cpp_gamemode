@@ -82,3 +82,20 @@ Event::CPlayerCommand vehs("/vehs", [](CPlayer* player) -> bool {
 	}
 	return true;
 });
+
+float x, y, z;
+
+Event::CPlayerCommand tp("/tp", [](CPlayer* player) -> bool {
+	player->SetInterior(5);
+	player->GetPos(x, y, z);
+	player->SetPos(22.7783, 1404.96, 1083.45);
+	return true;
+});
+
+Event::CPlayerCommand tpb("/tpb", [](CPlayer* player) -> bool {
+	player->SetInterior(0);
+	player->SetPos(x, y, z);
+	return true;
+});
+
+
