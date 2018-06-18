@@ -2,11 +2,21 @@
 
 namespace DB {
 	template<typename T>
-	class CDataCell : public IDataCell {
+	class CSecretDataCell : public IDataCell {
+		friend class CDataROw;
+
 		T data;
 		DataCellConfig _config;
+
+		T& operator()() {
+			return data;
+		}
+
+		explicit operator T() const {
+			return data;
+		}
 	public:
-		CDataCell(const std::string &field, T def, DataCellConfig config = { 0 }) {
+		CSecretDataCell(const std::string &field, T def, DataCellConfig config = { 0 }) {
 			if (std::is_same<T, float>::value) type = DataType::Float;
 			else if (std::is_same<T, uint32_t>::value) type = DataType::UInt32;
 			else if (std::is_same<T, uint64_t>::value) type = DataType::UInt64;
@@ -20,18 +30,10 @@ namespace DB {
 			_config = config;
 		}
 
-		CDataCell& operator=(T value) {
+		CSecretDataCell& operator=(T value) {
 			data = value;
 			changed = true;
 			return *this;
-		}
-
-		T& operator()() {
-			return data;
-		}
-
-		explicit operator T() const {
-			return data;
 		}
 
 		const std::string& GetName() {
@@ -59,18 +61,17 @@ namespace DB {
 					ss << " NOT NULL";
 			}
 			if (_config.Autoincrement)
-				ss << " AUTOINCREMENT"; 
-			else {
-				if (std::is_same<T, float>::value ||
-					std::is_same<T, uint32_t>::value ||
-					std::is_same<T, uint64_t>::value ||
-					std::is_same<T, int32_t>::value ||
-					std::is_same<T, int64_t>::value ||
-					std::is_same<T, bool>::value) 
-					ss << " DEFAULT " << data;
-				else if (std::is_same<T, std::string>::value) ss << " DEFAULT '" << data << "'";
-			}
-			return std::string(ss.str());
+				ss << " AUTOINCREMENT";
+
+			if (std::is_same<T, float>::value) ss << " REAL";
+			else if (
+				std::is_same<T, float>::value ||
+				std::is_same<T, uint32_t>::value ||
+				std::is_same<T, uint64_t>::value ||
+				std::is_same<T, int32_t>::value ||
+				std::is_same<T, int64_t>::value ||
+				std::is_same<T, bool>::value) ss << " DEFAULT " << data;
+			else if (std::is_same<T, std::string>::value) ss << " DEFAULT '" << data << "'";
 		}
 	};
 }

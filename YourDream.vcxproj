@@ -148,7 +148,11 @@
     <ClInclude Include="src\core\CCommandProcessor.h" />
     <ClInclude Include="src\database\CDataBase.h" />
     <ClInclude Include="src\database\CDataCell.h" />
+    <ClInclude Include="src\database\CDataRow.h" />
     <ClInclude Include="src\database\CPlayerData.h" />
+    <ClInclude Include="src\database\CPreparedStatement.h" />
+    <ClInclude Include="src\database\CSecretDataCell.h" />
+    <ClInclude Include="src\database\IDataCell.h" />
     <ClInclude Include="src\database\sqlite\sqlite3.h" />
     <ClInclude Include="src\entities\CActor.h" />
     <ClInclude Include="src\entities\CArea.h" />
@@ -157,6 +161,7 @@
     <ClInclude Include="src\entities\CPlayer.h" />
     <ClInclude Include="src\entities\CVehicle.h" />
     <ClInclude Include="src\events\CBaseEvent.h" />
+    <ClInclude Include="src\events\console\CRconCommand.h" />
     <ClInclude Include="src\events\game\CGameInited.h" />
     <ClInclude Include="src\events\player\CPlayerCommand.h" />
     <ClInclude Include="src\events\player\CPlayerConnect.h" />
@@ -166,6 +171,8 @@
     <ClInclude Include="src\factories\CObjectFactory.h" />
     <ClInclude Include="src\factories\CPickupFactory.h" />
     <ClInclude Include="src\factories\CVehicleFactory.h" />
+    <ClInclude Include="src\game\CEnExManager.h" />
+    <ClInclude Include="src\game\CEnterExit.h" />
     <ClInclude Include="src\game\CGameDataLoader.h" />
     <ClInclude Include="src\game\CLoaderIPL.h" />
     <ClInclude Include="src\internal\amx\amx.h" />
@@ -173,6 +180,7 @@
     <ClInclude Include="src\internal\amx\sclinux.h" />
     <ClInclude Include="src\internal\colors.h" />
     <ClInclude Include="src\internal\logging\Log.h" />
+    <ClInclude Include="src\internal\math\CVector3f.h" />
     <ClInclude Include="src\internal\plugin.h" />
     <ClInclude Include="src\internal\plugincommon.h" />
     <ClInclude Include="src\internal\sampgdk\sampgdk.h" />
@@ -188,6 +196,7 @@
   <ItemGroup>
     <ClCompile Include="src\core\CCommandProcessor.cpp" />
     <ClCompile Include="src\database\CDataBase.cpp" />
+    <ClCompile Include="src\database\IDataCell.cpp" />
     <ClCompile Include="src\database\sqlite\sqlite3.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -204,8 +213,19 @@
     <ClCompile Include="src\factories\CObjectFactory.cpp" />
     <ClCompile Include="src\factories\CPickupFactory.cpp" />
     <ClCompile Include="src\factories\CVehicleFactory.cpp" />
-    <ClCompile Include="src\game\CGameDataLoader.cpp" />
-    <ClCompile Include="src\game\CLoaderIPL.cpp" />
+    <ClCompile Include="src\game\CEnExManager.cpp" />
+    <ClCompile Include="src\game\CEnterExit.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\game\CGameDataLoader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\game\CLoaderIPL.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\internal\amxplugin.cpp" />
     <ClCompile Include="src\internal\main.cpp" />
     <ClCompile Include="src\internal\playerActions.cpp" />
@@ -216,6 +236,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\internal\streamerCallbacks.cpp" />
     <ClCompile Include="src\managers\CGameManager.cpp" />
     <ClCompile Include="src\managers\CPlayerManager.cpp" />
     <ClCompile Include="src\managers\CTimerManager.cpp" />
@@ -225,15 +246,12 @@
     <ClCompile Include="src\scripting\Houses.cpp" />
     <ClCompile Include="src\scripting\Init.cpp" />
     <ClCompile Include="src\scripting\OwnedCars.cpp" />
+    <ClCompile Include="src\scripting\rcon\DataManagement.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\utils\Utils.cpp" />
-    <ClCompile Include="src\vendor\streamer-invoke\callbacks.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="src\vendor\streamer-invoke\streamer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

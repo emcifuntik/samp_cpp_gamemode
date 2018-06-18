@@ -11,10 +11,11 @@ EXPORTS
 	OnPlayerCommandText
 	OnDialogResponse
 	OnPublicCall
-
-	;OnEnterExitModShop
+	OnRconCommand
 	OnGameModeExit
 	OnGameModeInit
+
+	;OnEnterExitModShop
 	;OnPlayerClickMap
 	;OnPlayerClickPlayer
 	;OnPlayerClickPlayerTextDraw
@@ -38,7 +39,6 @@ EXPORTS
 	;OnPlayerText
 	;OnPlayerUpdate
 	;OnPlayerWeaponShot
-	;OnRconCommand
 	;OnRconLoginAttempt
 	;OnTrailerUpdate
 	;OnUnoccupiedVehicleUpdate

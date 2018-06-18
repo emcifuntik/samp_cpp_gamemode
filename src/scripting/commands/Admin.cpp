@@ -85,10 +85,39 @@ Event::CPlayerCommand vehs("/vehs", [](CPlayer* player) -> bool {
 
 float x, y, z;
 
-Event::CPlayerCommand tp("/tp", [](CPlayer* player) -> bool {
-	player->SetInterior(5);
-	player->GetPos(x, y, z);
-	player->SetPos(22.7783, 1404.96, 1083.45);
+int lastSelected = -1;
+
+Event::CPlayerCommand tplist("/tplist", [](CPlayer* player) -> bool {
+
+	auto vec = Game::CEnExManager::get().GetVector();
+
+	std::stringstream ss;
+	ss << "Выберите точку для телепорта";
+	for (int i = 0; i < vec.size(); ++i) {
+		ss << "\n";
+		if (i == lastSelected)
+			ss << C_AFRICAN_VIOLET;
+		ss << vec[i]->GetName();
+		if (i == lastSelected)
+			ss << C_WHITE;
+	}
+
+	player->ShowListboxDialog(" * Телепорт в точку", ss.str().c_str(), "Перейти", "Отмена", [=](int selected) -> bool {
+		if (selected == 0)
+			return true;
+		lastSelected = selected - 1;
+
+		Game::CEnterExit* enex = Game::CEnExManager::get()[selected - 1];
+		if (enex != nullptr) {
+			if (player->GetInterior() == 0) {
+				player->GetPos(x, y, z);
+			}
+			player->SetInterior(enex->GetInterior());
+			player->SetPos(enex->GetExitPos() + CVector3f({ 0.f, 0.f, 1.0f }));
+			player->SetFacingAngle(enex->GetExitRotation());
+		}
+		return true;
+	});
 	return true;
 });
 

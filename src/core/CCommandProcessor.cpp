@@ -54,6 +54,39 @@ bool CCommandProcessor::EmitCommand(const std::string &cmd, int playerid)
 	return false;
 }
 
+bool CCommandProcessor::AddRcon(const std::string & cmd, std::function<bool(const std::string&)> func)
+{
+	rconMap.emplace(cmd, func);
+	return true;
+}
+
+bool CCommandProcessor::EmitRconCommand(const std::string &cmd)
+{
+	std::vector<std::string> params;
+	this->split(cmd, params);
+
+	std::string command = params.front();
+	params.erase(params.begin());
+
+	auto list = rconMap.equal_range(command);
+
+	for (auto iter = list.first; iter != list.second; ++iter) {
+		bool result = false;
+		auto spacePos = cmd.find_first_of(' ');
+		if (spacePos == std::string::npos) {
+			result = iter->second("");
+		}
+		else {
+			std::string paramsText = ((spacePos + 1) < cmd.size()) ? cmd.substr(spacePos + 1) : "";
+			result = iter->second( paramsText);
+		}
+		if (result)
+			return result;
+	}
+	Log::Info << "RCON команда '" << command << "' не найдена" << std::endl;
+	return true;
+}
+
 bool CCommandProcessor::Add(const std::string &cmd, std::function<bool(CPlayer*, const std::vector<std::string>&)> func)
 {
 	hashMap.emplace(cmd, func);
@@ -74,4 +107,8 @@ bool CCommandProcessor::Add(const std::string &cmd, std::function<bool(CPlayer*)
 
 PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerCommandText(int playerid, const char *cmdtext) {
 	return CCommandProcessor::get().EmitCommand(cmdtext, playerid);
+}
+
+PLUGIN_EXPORT bool PLUGIN_CALL OnRconCommand(const char *cmdtext) {
+	return CCommandProcessor::get().EmitRconCommand(cmdtext);
 }

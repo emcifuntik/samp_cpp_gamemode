@@ -61,6 +61,15 @@
     <Filter Include="game">
       <UniqueIdentifier>{70f14506-b5a8-4621-8d1a-cd0e4c99d08e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="internal\math">
+      <UniqueIdentifier>{256b1649-6ae5-4dd8-9832-8437c08a873c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripting\rcon">
+      <UniqueIdentifier>{4806c54e-b17d-49c1-a65a-534ce0285601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="events\console">
+      <UniqueIdentifier>{a342ff84-5588-4914-bd7a-7015200085b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\internal\logging\Log.h">
@@ -178,6 +187,30 @@
     <ClInclude Include="src\game\CLoaderIPL.h">
       <Filter>game</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\CEnterExit.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\internal\math\CVector3f.h">
+      <Filter>internal\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\CEnExManager.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database\IDataCell.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database\CDataRow.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database\CPreparedStatement.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\database\CSecretDataCell.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\console\CRconCommand.h">
+      <Filter>events\console</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\internal\sampgdk\sampgdk.c">
@@ -235,9 +268,6 @@
     <ClCompile Include="src\vendor\streamer-invoke\streamer.cpp">
       <Filter>vendor\streamer-invoke</Filter>
     </ClCompile>
-    <ClCompile Include="src\vendor\streamer-invoke\callbacks.cpp">
-      <Filter>vendor\streamer-invoke</Filter>
-    </ClCompile>
     <ClCompile Include="src\entities\CObject.cpp">
       <Filter>entities</Filter>
     </ClCompile>
@@ -276,6 +306,21 @@
     </ClCompile>
     <ClCompile Include="src\game\CLoaderIPL.cpp">
       <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\CEnterExit.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\internal\streamerCallbacks.cpp">
+      <Filter>internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\CEnExManager.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\database\IDataCell.cpp">
+      <Filter>database</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripting\rcon\DataManagement.cpp">
+      <Filter>scripting\rcon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,25 +4,16 @@
 
 class CVehicle;
 
-struct Position {
-	float x;
-	float y;
-	float z;
-};
-
-class CPlayer
+class CPlayer: public DB::CPlayerData
 {
 	unsigned short playerid;
 public:
 	std::variant<std::function<bool(bool)>, std::function<bool(int)>, std::function<bool(const char*)>, bool> dialogCallback;
-	bool loggedIn = false;
-	Position lastPosition = { 0, 0, 0 };
-	float heading = 0.f;
-	int sqlID = 0;
 
 	CPlayer(unsigned short playerid);
 	~CPlayer();
 	
+	#pragma region Player basic functions
 	bool ShowChoiceDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(bool)> callback = nullptr);
 	bool ShowChoiceDialog(const char * caption, const char * info, const char * button1, std::function<bool(bool)> callback = nullptr) { return ShowChoiceDialog(caption, info, button1, "", callback); }
 	bool ShowListboxDialog(const char * caption, const char * info, const char * button1, const char * button2, std::function<bool(int)> callback = nullptr);
@@ -40,8 +31,10 @@ public:
 	bool SetSpawnInfo(int team, int skin, float x, float y, float z, float rotation, int weapon1, int weapon1_ammo, int weapon2, int weapon2_ammo, int weapon3, int weapon3_ammo);
 	bool Spawn();
 	bool SetPos(float x, float y, float z);
+	bool SetPos(const CVector3f & posVector);
 	bool SetPosFindZ(float x, float y, float z);
 	bool GetPos(float &x, float &y, float &z);
+	bool GetPos(CVector3f & pos);
 	bool SetFacingAngle(float angle);
 	bool GetFacingAngle(float &angle);
 	bool IsInRangeOfPoint(float range, float x, float y, float z);
@@ -191,5 +184,8 @@ public:
 	bool StartRecordingData(int recordtype, const char * recordname);
 	bool StopRecordingData();
 	bool CreateExplosion(float X, float Y, float Z, int type, float Radius);
+	#pragma endregion
+
+
 };
 

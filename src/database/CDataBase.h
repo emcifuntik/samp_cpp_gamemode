@@ -1,15 +1,14 @@
 #pragma once
 
-#define sqlite3_column_float(stmt, pos) static_cast<float>(sqlite3_column_double(stmt, pos))
+namespace DB {
+	class CDataBase : public CSingleton<CDataBase>
+	{
+		friend class CSingleton<CDataBase>;
 
-class CDataBase: public CSingleton<CDataBase>
-{
-	friend class CSingleton<CDataBase>;
-
-	sqlite3 * dbFile = nullptr;
-	const char* dbName = "database.sqlite";
-	const char* playersInitialQuery = 
-R"sql(
+		sqlite3 * dbFile = nullptr;
+		const char* dbName = "database.sqlite";
+		const char* playersInitialQuery =
+			R"sql(
 CREATE TABLE IF NOT EXISTS users (
 	user_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	user_name CHAR(24) NOT NULL,
@@ -58,14 +57,19 @@ CREATE TABLE IF NOT EXISTS vehicles (
 	vehicle_param_boot INTEGER NOT NULL DEFAULT 0,
 	FOREIGN KEY(vehicle_owner) REFERENCES users(user_id));
 )sql";
-	//DROP TABLE IF EXISTS users;
-	~CDataBase();
-public:
-	void Init();
+		//DROP TABLE IF EXISTS users;
+		~CDataBase();
+	public:
+		void Init();
 
-	bool UserRegistered(const char *username);
-	bool RegisterUser(const char * username, const char * password);
-	bool LoginUser(CPlayer * player, const char * username, const char * password);
-	bool SaveUser(CPlayer * player);
-};
+		CPreparedStatement* CreateStatement(std::string query);
+		bool Query(const std::string& query, std::string& errorText);
+
+		/*bool UserRegistered(const char *username);
+		bool RegisterUser(const char * username, const char * password);
+		bool LoginUser(CPlayer * player, const char * username, const char * password);
+		bool SaveUser(CPlayer * player);*/
+	};
+}
+
 

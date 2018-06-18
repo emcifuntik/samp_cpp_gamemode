@@ -99,7 +99,7 @@ public:
 		{
 			return get()
 				.Put(Log::White)
-				.Put(" ")
+				.Put("[Info] ")
 				.Put(val);
 		}
 	} Info;

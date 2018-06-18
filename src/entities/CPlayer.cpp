@@ -86,12 +86,20 @@ bool CPlayer::SetPos(float x, float y, float z) {
 	return sampgdk::SetPlayerPos(this->playerid, x, y, z);
 }
 
+bool CPlayer::SetPos(const CVector3f& posVector) {
+	return sampgdk::SetPlayerPos(this->playerid, posVector.x, posVector.y, posVector.z);
+}
+
 bool CPlayer::SetPosFindZ(float x, float y, float z) {
 	return sampgdk::SetPlayerPosFindZ(this->playerid, x, y, z);
 }
 
 bool CPlayer::GetPos(float &x, float &y, float &z) {
 	return sampgdk::GetPlayerPos(this->playerid, &x, &y, &z);
+}
+
+bool CPlayer::GetPos(CVector3f &pos) {
+	return sampgdk::GetPlayerPos(this->playerid, &pos.x, &pos.y, &pos.z);
 }
 
 bool CPlayer::SetFacingAngle(float angle) {

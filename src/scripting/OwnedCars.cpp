@@ -1,7 +1,8 @@
 #include "stdafx.h"
 
 Event::CGameInited init([]() -> bool {
-	CActor* seller = CActorFactory::get().Create(240, -1664.9186, 1206.2539, 7.2546, 324.7190, false, 255.f);
+	CActor* seller = CActorFactory::get().Create(240, -1664.9186f, 1206.2539f, 7.2546f, 324.7190f, false, 255.f);
+
 	seller->OnDamaged([](CPlayer* player, float amount, int weapon, int bodypart) -> void {
 		player->SetWantedLevel(player->GetWantedLevel() + 1);
 	});

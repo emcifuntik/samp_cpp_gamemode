@@ -12,6 +12,7 @@
 #include <map>
 #include <unordered_map>
 #include <sstream>
+#include <fstream>
 #include <filesystem>
 
 //Patterns
@@ -25,12 +26,26 @@
 #include "internal\plugin.h"
 #include "internal\logging\Log.h"
 #include "internal\colors.h"
+#include "internal\math\CVector3f.h"
 
 //Streamer
 #include "vendor\streamer-invoke\streamer.hpp"
 
 //Game
+#include "game\CEnterExit.h"
+#include "game\CEnExManager.h"
+#include "game\CLoaderIPL.h"
 #include "game\CGameDataLoader.h"
+
+//Database
+#include "database\sqlite\sqlite3.h"
+#include "database\IDataCell.h"
+#include "database\CDataCell.h"
+#include "database\CSecretDataCell.h"
+#include "database\CPreparedStatement.h"
+#include "database\CDataBase.h"
+#include "database\CDataRow.h"
+#include "database\CPlayerData.h"
 
 //Entities
 #include "entities\CPlayer.h"
@@ -54,17 +69,12 @@
 //Command processor
 #include "core\CCommandProcessor.h"
 
-//Database
-#include "database\sqlite\sqlite3.h"
-#include "database\CDataBase.h"
-#include "database\CDataCell.h"
-#include "database\CPlayerData.h"
-
 //Events
 #include "events\CBaseEvent.h"
 #include "events\player\CPlayerConnect.h"
 #include "events\player\CPlayerDisconnect.h"
 #include "events\player\CPlayerSpawn.h"
 #include "events\player\CPlayerCommand.h"
+#include "events\console\CRconCommand.h"
 #include "events\game\CGameInited.h"
 

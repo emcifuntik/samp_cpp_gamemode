@@ -1,12 +1,12 @@
 #include "stdafx.h"
 namespace fs = std::experimental::filesystem;
 
-void GetIPLsInFolder(const std::string& folder, std::vector<std::string>& results) {
+void GetFilesInFolder(const std::string& folder, const std::string& extension, std::vector<std::string>& results) {
 	for (auto & p : fs::recursive_directory_iterator(folder)) {
 		std::stringstream ss;
 		ss << p;
 		std::string fileName = ss.str();
-		if(fileName.substr(fileName.size() - 4, 4) == ".ipl")
+		if(fileName.substr(fileName.size() - 4, 4) == extension)
 			results.push_back(fileName);
 	}
 }
@@ -14,7 +14,11 @@ void GetIPLsInFolder(const std::string& folder, std::vector<std::string>& result
 void Game::CGameDataLoader::LoadIPLs(const std::string & folder)
 {
 	std::vector<std::string> ipls;
-	GetIPLsInFolder(folder, ipls);
+	GetFilesInFolder(folder, ".ipl", ipls);
 
+	for (auto ipl : ipls) {
+		CLoaderIPL loader(ipl);
+		loader.Load();
+	}
 	//TODO: IPL Loader
 }
