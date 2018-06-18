@@ -23,7 +23,10 @@ namespace DB {
 		bool Auth(const std::string& name, uint32_t pass) {
 			username = name;
 			password = pass;
-			return FindBySecrets();
+			std::vector<IDataCell*> fields;
+			fields.push_back(&username);
+			fields.push_back(&password);
+			return FindByFields(fields);
 		}
 	};
 };

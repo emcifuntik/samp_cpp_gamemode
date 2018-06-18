@@ -100,14 +100,14 @@ namespace DB {
 			return saved;
 		}
 
-		bool FindBySecrets() {
-			std::stringstream queryStream;
+		bool FindByFields(const std::vector<IDataCell*>& cells) {
+   			std::stringstream queryStream;
 			queryStream << "SELECT " << ID.fieldName;
 			for (auto cell : _allFields)
 				queryStream << ", " << cell->fieldName;
 			queryStream << " FROM " << tName << "WHERE ";
 			bool first = true;
-			for (auto cell : _secretFields) {
+			for (auto cell : cells) {
 				if (first) first = false;
 				else queryStream << " AND ";
 				queryStream << cell->fieldName << " = ?";
@@ -116,7 +116,7 @@ namespace DB {
 
 			auto stmt = CDataBase::get().CreateStatement(queryStream.str());
 
-			for (auto cell : _secretFields) {
+			for (auto cell : cells) {
 				(*stmt) << cell;
 			}
 
