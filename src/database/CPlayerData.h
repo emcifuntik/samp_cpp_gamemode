@@ -28,5 +28,18 @@ namespace DB {
 			fields.push_back(&password);
 			return FindByFields(fields);
 		}
+
+		bool Register(const std::string& name, uint32_t pass) {
+			username = name;
+			password = pass;
+			return Insert();
+		}
+
+		bool Exists(const std::string& name) {
+			CDataCell<std::string> nameField("user_name", name);
+			return CDataRow::Exists(nameField);
+		}
+
+		//bool 
 	};
 };

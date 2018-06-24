@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS vehicles (
 
 		CPreparedStatement* CreateStatement(std::string query);
 		bool Query(const std::string& query, std::string& errorText);
+		sqlite_int64 LastInsertID();
 
 		/*bool UserRegistered(const char *username);
 		bool RegisterUser(const char * username, const char * password);

@@ -8,6 +8,7 @@ class CPlayer: public DB::CPlayerData
 {
 	unsigned short playerid;
 public:
+	bool loggedIn = false;
 	std::variant<std::function<bool(bool)>, std::function<bool(int)>, std::function<bool(const char*)>, bool> dialogCallback;
 
 	CPlayer(unsigned short playerid);
@@ -185,7 +186,5 @@ public:
 	bool StopRecordingData();
 	bool CreateExplosion(float X, float Y, float Z, int type, float Radius);
 	#pragma endregion
-
-
 };
 

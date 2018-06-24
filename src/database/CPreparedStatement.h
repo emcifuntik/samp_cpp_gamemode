@@ -12,7 +12,9 @@ namespace DB {
 
 		CPreparedStatement(sqlite3 *db, std::string query): dbHandler(db) {
 			if (sqlite3_prepare(dbHandler, query.c_str(), query.size(), &stmt, nullptr)) {
-				throw std::exception(sqlite3_errmsg(dbHandler));
+				std::string errMessage = sqlite3_errmsg(dbHandler);
+				Log::Error << errMessage << std::endl;
+				throw std::exception(errMessage.c_str());
 			}
 		}
 
@@ -47,6 +49,7 @@ namespace DB {
 					throw std::exception(sqlite3_errmsg(dbHandler));
 				break;
 			}
+			return (*this);
 		}
 
 		CPreparedStatement& operator>>(const IDataCell* cell) {
@@ -73,7 +76,14 @@ namespace DB {
 				(*(CDataCell<bool>*)(cell)) = sqlite3_column_int(stmt, writeIndex++);
 				break;
 			}
+			return (*this);
 		}
+
+		CPreparedStatement& operator>>(uint64_t& cell) { cell = sqlite3_column_int(stmt, writeIndex++);return (*this);}
+		CPreparedStatement& operator>>(int64_t& cell) { cell = sqlite3_column_int(stmt, writeIndex++);return (*this);}
+		CPreparedStatement& operator>>(uint32_t& cell) { cell = sqlite3_column_int(stmt, writeIndex++);return (*this);}
+		CPreparedStatement& operator>>(int32_t& cell) { cell = sqlite3_column_int(stmt, writeIndex++);return (*this);}
+		CPreparedStatement& operator>>(bool& cell) {cell = sqlite3_column_int(stmt, writeIndex++);return (*this);}
 
 		std::string Error() {
 			return sqlite3_errmsg(dbHandler);

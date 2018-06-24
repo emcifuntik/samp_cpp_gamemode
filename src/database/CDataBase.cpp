@@ -38,6 +38,11 @@ bool DB::CDataBase::Query(const std::string & query, std::string &errorText)
 	return true;
 }
 
+sqlite_int64 DB::CDataBase::LastInsertID()
+{
+	return sqlite3_last_insert_rowid(dbFile);
+}
+
 //bool CDataBase::UserRegistered(const char * username)
 //{
 //	bool exists = false;

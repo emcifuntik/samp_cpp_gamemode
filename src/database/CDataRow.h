@@ -4,13 +4,13 @@
 
 namespace DB {
 	class CDataRow {
-		CDataCell<uint32_t> ID = CDataCell<uint32_t>(INVALID_FIELD_NAME, 0);
+		CDataCell<uint64_t> ID = CDataCell<uint64_t>(INVALID_FIELD_NAME, 0);
 		std::string tName;
 		std::vector<IDataCell *> _allFields;
 		std::vector<IDataCell *> _secretFields;
 	protected:
 		CDataRow(const char* tableName, const char* idField): tName(tableName) {
-			ID = CDataCell<uint32_t>(idField, 0, { true, true, false, false });
+			ID = CDataCell<uint64_t>(idField, 0, { true, true, false, false });
 		}
 
 		bool RegisterCell(IDataCell& cell) {
@@ -100,12 +100,64 @@ namespace DB {
 			return saved;
 		}
 
+		bool Insert() {
+			std::vector<IDataCell*> toInsert;
+			for (auto cell : _secretFields)
+				toInsert.push_back(cell);
+			for (auto cell : _allFields)
+				toInsert.push_back(cell);
+
+			std::stringstream queryStream;
+			queryStream << "INSERT INTO " << tName << " (";
+			bool first = true;
+			for (auto cell : toInsert) {
+				if (first) first = false;
+				else queryStream << ", ";
+				queryStream << cell->fieldName;
+			}
+			queryStream << ") VALUES (";
+			first = true;
+			for (auto cell : toInsert) {
+				if (first) first = false;
+				else queryStream << ", ";
+				queryStream << "?";
+			}
+			queryStream << ")";
+			auto stmt = CDataBase::get().CreateStatement(queryStream.str());
+
+			for (auto cell : toInsert) {
+				(*stmt) << cell;
+			}
+
+			bool saved = false;
+			int result;
+			do
+			{
+				result = stmt->Step();
+				switch (result)
+				{
+				case SQLITE_DONE:
+					saved = true;
+					break;
+				case SQLITE_ERROR:
+					Log::Error << "[SQLite] Ошибка авторизации игрока: " << stmt->Error() << Log::Endl;
+					break;
+				default:
+					Log::Error << "[SQLite] Неизвестный результат: " << result << Log::Endl;
+					break;
+				}
+			} while (result == SQLITE_ROW);
+			stmt->Finalize();
+			ID = CDataBase::get().LastInsertID();
+			return saved;
+		}
+
 		bool FindByFields(const std::vector<IDataCell*>& cells) {
    			std::stringstream queryStream;
 			queryStream << "SELECT " << ID.fieldName;
 			for (auto cell : _allFields)
 				queryStream << ", " << cell->fieldName;
-			queryStream << " FROM " << tName << "WHERE ";
+			queryStream << " FROM " << tName << " WHERE ";
 			bool first = true;
 			for (auto cell : cells) {
 				if (first) first = false;
@@ -146,6 +198,39 @@ namespace DB {
 				}
 			} while (result == SQLITE_ROW);
 			stmt->Finalize();
+			return found;
+		}
+
+		bool Exists(IDataCell& cell) {
+			std::stringstream queryStream;
+			queryStream << "SELECT count(" << cell.fieldName << ") AS `found` FROM " << tName << " WHERE " << cell.fieldName << " = ? LIMIT 1";
+
+			auto stmt = CDataBase::get().CreateStatement(queryStream.str());
+			(*stmt) << &cell;
+
+			bool found = false;
+			int result;
+			do
+			{
+				result = stmt->Step();
+				switch (result)
+				{
+				case SQLITE_DONE:
+					break;
+				case SQLITE_ROW:
+				{
+					(*stmt) >> found;
+					break;
+				}
+				case SQLITE_ERROR:
+					Log::Error << "[SQLite] Ошибка SELECT запроса: " << stmt->Error() << Log::Endl;
+					break;
+				default:
+					Log::Error << "[SQLite] Неизвестный результат: " << result << Log::Endl;
+					break;
+				}
+			} while (result == SQLITE_ROW);
+			stmt->Finalize(); 
 			return found;
 		}
 	};
