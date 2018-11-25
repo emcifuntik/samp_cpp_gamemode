@@ -13,8 +13,8 @@ namespace DB {
 		CPreparedStatement(sqlite3 *db, std::string query): dbHandler(db) {
 			if (sqlite3_prepare(dbHandler, query.c_str(), query.size(), &stmt, nullptr)) {
 				std::string errMessage = sqlite3_errmsg(dbHandler);
-				Log::Error << errMessage << std::endl;
-				throw std::exception(errMessage.c_str());
+				sampgdk::logprintf("[Error] %s", errMessage);
+				throw std::runtime_error(errMessage.c_str());
 			}
 		}
 
@@ -22,31 +22,31 @@ namespace DB {
 			switch (cell->type) {
 			case DataType::Float:
 				if (sqlite3_bind_double(stmt, varIndex++, (*(CDataCell<float>*)(cell))()))
-					throw std::exception(sqlite3_errmsg(dbHandler));
+					throw std::runtime_error(sqlite3_errmsg(dbHandler));
 				break;
 			case DataType::Int32:
 				if (sqlite3_bind_int(stmt, varIndex++, (*(CDataCell<int32_t>*)(cell))()))
-					throw std::exception(sqlite3_errmsg(dbHandler));
+					throw std::runtime_error(sqlite3_errmsg(dbHandler));
 				break;
 			case DataType::UInt32:
 				if (sqlite3_bind_int(stmt, varIndex++, (*(CDataCell<uint32_t>*)(cell))()))
-					throw std::exception(sqlite3_errmsg(dbHandler));
+					throw std::runtime_error(sqlite3_errmsg(dbHandler));
 				break;
 			case DataType::Int64:
 				if (sqlite3_bind_int64(stmt, varIndex++, (*(CDataCell<int64_t>*)(cell))()))
-					throw std::exception(sqlite3_errmsg(dbHandler));
+					throw std::runtime_error(sqlite3_errmsg(dbHandler));
 				break;
 			case DataType::UInt64:
 				if (sqlite3_bind_int64(stmt, varIndex++, (*(CDataCell<uint64_t>*)(cell))()))
-					throw std::exception(sqlite3_errmsg(dbHandler));
+					throw std::runtime_error(sqlite3_errmsg(dbHandler));
 				break;
 			case DataType::String:
 				if (sqlite3_bind_text(stmt, varIndex++, (*(CDataCell<std::string>*)(cell))().c_str(), (*(CDataCell<std::string>*)(cell))().size(), nullptr))
-					throw std::exception(sqlite3_errmsg(dbHandler));
+					throw std::runtime_error(sqlite3_errmsg(dbHandler));
 				break;
 			case DataType::Boolean:
 				if (sqlite3_bind_int(stmt, varIndex++, (*(CDataCell<bool>*)(cell))()))
-					throw std::exception(sqlite3_errmsg(dbHandler));
+					throw std::runtime_error(sqlite3_errmsg(dbHandler));
 				break;
 			}
 			return (*this);

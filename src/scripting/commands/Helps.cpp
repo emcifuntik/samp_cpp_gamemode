@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 Event::CPlayerCommand help("/help", [](CPlayer* player) -> bool {
-	player->ShowChoiceDialog("{00AA00}Помощь по командам", "LOL", "Понятно");
+	player->ShowChoiceDialog("{00AA00}РџРѕРјРѕС‰СЊ РїРѕ РєРѕРјР°РЅРґР°Рј", "LOL", "РџРѕРЅСЏС‚РЅРѕ");
 
 	return true;
 });

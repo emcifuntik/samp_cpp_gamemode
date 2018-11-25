@@ -642,23 +642,20 @@ namespace Houses {
 		/*CObjectFactory::get().Create(19489, -2621.41, 174.45, 6.61, 0.00, 0.00, 90.00);
 		CObjectFactory::get().Create(19490, -2621.41, 174.45, 6.61, 0.00, 0.00, 90.00);*/
 
-		for (int i = 0; i < 621; ++i) {
-			auto pickup = CPickupFactory::get().Create(1273, 1, houses[i].enterX, houses[i].enterY, houses[i].enterZ);
-			pickup->OnPickedUp([=](CPlayer* player) -> void {
-				HouseInfo h = houses[i];
-				auto list = Game::CEnExManager::get().GetByName(houses[i].enexName);
-				for (auto iter = list.first; iter != list.second; ++iter) {
-					if (iter->second->GetInterior() != 0) {
-						player->GetPos(outdoorPos);
-						//player->SetPosWithSave(iter->second->GetExitPos() + CVector3f(0.f, 0.f, 0.5f));
-						player->SetInterior(iter->second->GetInterior());
-					}
-				}
-			});
-		}
-
-		
-
+		// for (int i = 0; i < 621; ++i) {
+		// 	auto pickup = CPickupFactory::get().Create(1273, 1, houses[i].enterX, houses[i].enterY, houses[i].enterZ);
+		// 	pickup->OnPickedUp([=](CPlayer* player) -> void {
+		// 		HouseInfo h = houses[i];
+		// 		auto list = Game::CEnExManager::get().GetByName(houses[i].enexName);
+		// 		for (auto iter = list.first; iter != list.second; ++iter) {
+		// 			if (iter->second->GetInterior() != 0) {
+		// 				player->GetPos(outdoorPos);
+		// 				//player->SetPosWithSave(iter->second->GetExitPos() + CVector3f(0.f, 0.f, 0.5f));
+		// 				player->SetInterior(iter->second->GetInterior());
+		// 			}
+		// 		}
+		// 	});
+		// }
 		return false;
 	});
 

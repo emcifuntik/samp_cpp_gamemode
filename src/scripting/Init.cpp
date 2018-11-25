@@ -1,11 +1,6 @@
 #include "stdafx.h"
 
 Event::CGameInited GameInited([]() {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-
-	Log& log = Log::get();
-	log.AddOut(&std::wcout);
 	sampgdk::SetGameModeText("C++ Private");
 	sampgdk::DisableInteriorEnterExits();
 	sampgdk::EnableStuntBonusForAll(false);

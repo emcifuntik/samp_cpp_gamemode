@@ -13,7 +13,7 @@ size_t CCommandProcessor::split(const std::string & txt, std::vector<std::string
 		pos = txt.find(ch, initialPos);
 	}
 
-	strs.push_back(txt.substr(initialPos, min(pos, txt.size()) - initialPos + 1));
+	strs.push_back(txt.substr(initialPos, (std::min)(pos, txt.size()) - initialPos + 1));
 	return strs.size();
 }
 
@@ -83,7 +83,7 @@ bool CCommandProcessor::EmitRconCommand(const std::string &cmd)
 		if (result)
 			return result;
 	}
-	Log::Info << "RCON команда '" << command << "' не найдена" << std::endl;
+	sampgdk::logprintf("RCON command '%s' not found", command);
 	return true;
 }
 

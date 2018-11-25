@@ -1,7 +1,5 @@
 #include "stdafx.h"
 
-Log::Log_Info Log::Info; Log::Log_Error Log::Error; Log::Log_Debug Log::Debug;
-
 bool HelpMessage(CPlayer * player, std::vector<std::string> params) {
 	return true;
 }

@@ -36,7 +36,7 @@ namespace DB {
 
 			std::string errMessage;
 			if (!DB::CDataBase::get().Query(ss.str(), errMessage)) {
-				Log::Error << "[SQLite] Ошибка создания таблицы " << tName << ". " << errMessage << std::endl;
+				sampgdk::logprintf("[SQLite] Error while creating table %s. %s", tName, errMessage);
 				return false;
 			}
 			return true;
@@ -48,7 +48,7 @@ namespace DB {
 
 			std::string errMessage;
 			if (!DB::CDataBase::get().Query(ss.str(), errMessage)) {
-				Log::Error << "[SQLite] Ошибка удаления таблицы " << tName << ". " << errMessage << std::endl;
+				sampgdk::logprintf("[SQLite] Error while deleting table %s. %s", tName, errMessage);
 				return false;
 			}
 			return true;
@@ -89,10 +89,10 @@ namespace DB {
 					saved = true;
 					break;
 				case SQLITE_ERROR:
-					Log::Error << "[SQLite] Ошибка авторизации игрока: " << stmt->Error() << Log::Endl;
+					sampgdk::logprintf("[SQLite] Player auth error: %s", stmt->Error());
 					break;
 				default:
-					Log::Error << "[SQLite] Неизвестный результат: " << result << Log::Endl;
+					sampgdk::logprintf("[SQLite] Unknown result: %d", result);
 					break;
 				}
 			} while (result == SQLITE_ROW);
@@ -140,10 +140,10 @@ namespace DB {
 					saved = true;
 					break;
 				case SQLITE_ERROR:
-					Log::Error << "[SQLite] Ошибка авторизации игрока: " << stmt->Error() << Log::Endl;
+					sampgdk::logprintf("[SQLite] Player auth error: %s", stmt->Error());
 					break;
 				default:
-					Log::Error << "[SQLite] Неизвестный результат: " << result << Log::Endl;
+					sampgdk::logprintf("[SQLite] Unknown result: %d", result);
 					break;
 				}
 			} while (result == SQLITE_ROW);
@@ -190,10 +190,10 @@ namespace DB {
 					break;
 				}
 				case SQLITE_ERROR:
-					Log::Error << "[SQLite] Ошибка SELECT запроса: " << stmt->Error() << Log::Endl;
+					sampgdk::logprintf("[SQLite] SELECT query error: %s", stmt->Error());
 					break;
 				default:
-					Log::Error << "[SQLite] Неизвестный результат: " << result << Log::Endl;
+					sampgdk::logprintf("[SQLite] Unknown result: %d", result);
 					break;
 				}
 			} while (result == SQLITE_ROW);
@@ -223,10 +223,10 @@ namespace DB {
 					break;
 				}
 				case SQLITE_ERROR:
-					Log::Error << "[SQLite] Ошибка SELECT запроса: " << stmt->Error() << Log::Endl;
+					sampgdk::logprintf("[SQLite] SELECT query error: %s", stmt->Error());
 					break;
 				default:
-					Log::Error << "[SQLite] Неизвестный результат: " << result << Log::Endl;
+					sampgdk::logprintf("[SQLite] Unknown result: %d", result);
 					break;
 				}
 			} while (result == SQLITE_ROW);

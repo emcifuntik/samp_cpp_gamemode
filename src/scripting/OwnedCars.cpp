@@ -9,7 +9,7 @@ Event::CGameInited init([]() -> bool {
 
 	CPickup* buyCarPickup = CPickupFactory::get().Create(1274, 1, -1663.6060f, 1208.4708f, 7.2546f);
 	buyCarPickup->OnPickedUp([](CPlayer* player) {
-		player->ShowListboxDialog(C_AZURE"  Äîáğî ïîæàëîâàòü â " C_AWESOME " Otto's Autos", C_AMBER "Âûáåğèòå èíòåğåñóşùèé âàñ êëàññ òğàíñïîğòà èç ñïèñêà íèæå:" C_WHITE "\nÑïîğò\nÊóïå\nÑåìåéíàÿ", "Ïåğåéòè", "Âûõîä", [](int selected) -> bool {
+		player->ShowListboxDialog(C_AZURE"  Ğ”Ğ¾Ğ±Ñ€Ğ¾ Ğ¿Ğ¾Ğ¶Ğ°Ğ»Ğ¾Ğ²Ğ°Ñ‚ÑŒ Ğ² " C_AWESOME " Otto's Autos", C_AMBER "Ğ’Ñ‹Ğ±ĞµÑ€Ğ¸Ñ‚Ğµ Ğ¸Ğ½Ñ‚ĞµÑ€ĞµÑÑƒÑÑ‰Ğ¸Ğ¹ Ğ²Ğ°Ñ ĞºĞ»Ğ°ÑÑ Ñ‚Ñ€Ğ°Ğ½ÑĞ¿Ğ¾Ñ€Ñ‚Ğ° Ğ¸Ğ· ÑĞ¿Ğ¸ÑĞºĞ° Ğ½Ğ¸Ğ¶Ğµ:" C_WHITE "\nĞ¡Ğ¿Ğ¾Ñ€Ñ‚\nĞšÑƒĞ¿Ğµ\nĞ¡ĞµĞ¼ĞµĞ¹Ğ½Ğ°Ñ", "ĞŸĞµÑ€ĞµĞ¹Ñ‚Ğ¸", "Ğ’Ñ‹Ñ…Ğ¾Ğ´", [](int selected) -> bool {
 
 			return true;
 		});

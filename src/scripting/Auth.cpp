@@ -3,7 +3,7 @@
 Event::CPlayerConnect Connect([](CPlayer* player) {
 	player->ToggleSpectating(true);
 	player->SetSpawnInfo(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-	player->SendMessage(0x00AA00FF, "Äîáðî ïîæàëîâàòü");
+	player->SendMessage(0x00AA00FF, "Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ");
 	
 	int hours, minutes;
 	GetInGameTime(hours, minutes);
@@ -16,10 +16,10 @@ Event::CPlayerConnect Connect([](CPlayer* player) {
 	bool registered = player->Exists(playerName);
 
 	if (!registered) {
-		player->ShowPasswordDialog("{FFFFFF}Äîáðî ïîæàëîâàòü íà {00AA00}YourDream Roleplay", "Ââåäèòå ïàðîëü ÷òîáû çàðåãèñòðèðîâàòüñÿ íà ñåðâåðå!", "Äàëåå", [player, playerName](const char* password) {
+		player->ShowPasswordDialog("{FFFFFF}Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ Ð½Ð° {00AA00}YourDream Roleplay", "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒÑÑ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ!", "Ð”Ð°Ð»ÐµÐµ", [player, playerName](const char* password) {
 			bool isRegistered = player->Register(playerName, jhash(password));
 			if (isRegistered) {
-				player->SendMessage(0x00FF00FF, " Âû óñïåøíî çàðåãèñòðèðîâàëèñü íà ñåðâåðå");
+				player->SendMessage(0x00FF00FF, " Ð’Ñ‹ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð»Ð¸ÑÑŒ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ");
 				player->loggedIn = true;
 				player->ToggleSpectating(false);
 			}
@@ -27,14 +27,14 @@ Event::CPlayerConnect Connect([](CPlayer* player) {
 		});
 	}
 	else {
-		player->ShowPasswordDialog("{FFFFFF}Äîáðî ïîæàëîâàòü íà {00AA00}YourDream Roleplay", "Âû çàðåãèñòðèðîâàíû.\nÂâåäèòå ñâîé ïàðîëü!", "Âîéòè", [player, playerName](const char* password) {
+		player->ShowPasswordDialog("{FFFFFF}Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ Ð½Ð° {00AA00}YourDream Roleplay", "Ð’Ñ‹ Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ñ‹.\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ²Ð¾Ð¹ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ!", "Ð’Ð¾Ð¹Ñ‚Ð¸", [player, playerName](const char* password) {
 			bool loggedIn = player->Auth(playerName, jhash(password));
 			if (!loggedIn) {
-				player->SendMessage(0x00FF00FF, " Ïàðîëü ââåä¸í íå âåðíî. Âû áûëè êèêíóòû ñ ñåðâåðà");
+				player->SendMessage(0x00FF00FF, " ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð²Ð²ÐµÐ´Ñ‘Ð½ Ð½Ðµ Ð²ÐµÑ€Ð½Ð¾. Ð’Ñ‹ Ð±Ñ‹Ð»Ð¸ ÐºÐ¸ÐºÐ½ÑƒÑ‚Ñ‹ Ñ ÑÐµÑ€Ð²ÐµÑ€Ð°");
 				//player->Kick
 			}
 			else {
-				player->SendMessage(0x00FF00FF, " Âû óñïåøíî âîøëè íà ñåðâåð");
+				player->SendMessage(0x00FF00FF, " Ð’Ñ‹ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð²Ð¾ÑˆÐ»Ð¸ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€");
 				player->loggedIn = true;
 				player->ToggleSpectating(false);
 				player->SetPos(player->posX(), player->posY(), player->posZ());
